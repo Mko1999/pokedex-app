@@ -1,0 +1,64 @@
+@import "../../styles/utils.scss";
+@import "../../styles/variables.scss";
+@import "../../styles//breakpoints.scss";
+
+.main_page {
+  width: 100%;
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @include breakpoint(laptop) {
+      max-width: 100%;
+      margin: 0 40px;
+    }
+    @include breakpoint(laptop-small) {
+      max-width: 100%;
+      margin: 0 25px;
+    }
+    @include breakpoint(tablet) {
+      max-width: 100%;
+      margin: 0 25px;
+    }
+    @include breakpoint(small-phone) {
+      max-width: 100%;
+      margin: 0 30px;
+    }
+  }
+  &__title {
+    @include flexCenter(column);
+    color: $redColor;
+    font-size: 48px;
+  }
+  &__header {
+    @include flexSpaceAround(row);
+    width: 100%;
+    height: 60px;
+    background: #fbe5dc;
+    border-radius: 6px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+      rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+
+    @include breakpoint(tablet) {
+      @include flexCenter(column);
+      margin: 60px 0;
+      height: unset;
+    }
+  }
+  &__all_pokemons {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-gap: 15px;
+    margin-top: 20px;
+
+    @include breakpoint(laptop) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @include breakpoint(tablet) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @include breakpoint(small-phone) {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }
+}

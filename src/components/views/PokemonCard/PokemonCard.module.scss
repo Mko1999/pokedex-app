@@ -1,0 +1,36 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/utils.scss";
+
+.pokemon_card {
+  position: relative;
+  box-shadow: $boxShadow;
+  border-radius: 8px;
+  min-height: 280px;
+  background: linear-gradient(45deg, #fbe5dc, #fff);
+
+  &__container {
+    background: #bca48f36;
+    @include flexCenter(row);
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+    padding: 15px;
+
+    &__background {
+      position: relative;
+
+      &__image {
+        max-width: 100%;
+        width: 100%;
+
+        img {
+          width: 100%;
+          display: block;
+          max-width: 100%;
+          height: 175px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

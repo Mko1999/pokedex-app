@@ -1,0 +1,39 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/utils.scss";
+@import "../../../styles/breakpoints.scss";
+.sort_pokemons {
+  position: relative;
+  width: 300px;
+  &__container {
+    @include flexCenter(row);
+    padding: 8px;
+
+    @include breakpoint(laptop-small) {
+      justify-content: flex-end;
+    }
+    @include breakpoint(phone) {
+      justify-content: center;
+    }
+    &__title {
+      color: $redColor;
+      font-size: 16px;
+      padding-right: 5px;
+      @include breakpoint(laptop-small) {
+        padding-right: 6px;
+      }
+    }
+    &__arrow {
+      transform: rotate(90deg);
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    &__element {
+      list-style-type: none;
+    }
+  }
+}

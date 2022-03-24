@@ -1,0 +1,41 @@
+@import "../../../styles/utils.scss";
+@import "../../../styles/variables.scss";
+@import "../../../styles/breakpoints.scss";
+
+.searchbar {
+  @include flexCenter(row);
+  max-width: 300px;
+  width: 300px;
+
+  @include breakpoint(tablet) {
+    margin-top: 10px;
+    max-width: unset;
+    width: 80%;
+  }
+  &__input {
+    padding: 8px 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    @include breakpoint(tablet){
+      width: 100%;
+    }
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
+  }
+
+  &__button{
+    border: none;
+    outline: none;
+    background: $redColor;
+    width: 40px;
+    height: 34px;
+
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}

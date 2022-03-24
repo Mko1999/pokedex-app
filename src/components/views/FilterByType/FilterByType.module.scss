@@ -1,0 +1,65 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/utils.scss";
+@import "../../../styles/breakpoints.scss";
+
+
+.filter_by_type {
+  position: relative;
+  width: 120px;
+
+  &__container {
+    padding: 8px;
+    @include flexSpaceAround(row);
+    cursor: pointer;
+    box-shadow: $boxShadow;
+    height: 40px;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 8px;
+    @include breakpoint(tablet) {
+      margin: 20px 0 10px;
+    }
+  }
+  &__title {
+    font-size: 16px;
+    color: $redColor;
+  }
+  &__arrow {
+    color: $redColor;
+    transition: .4s ease;
+    transform: rotate(-90deg);
+    
+    &__active{
+      transform: rotate(90deg);
+      transition: .4s ease;
+      
+    }
+  }
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: $boxShadow;
+    background: #ffcccc;
+    border-radius: 6px;
+    z-index: 5;
+    &__active {
+      display: none;
+    }
+
+    &:hover {
+      background: $blueColor;
+    }
+    &:hover &__element {
+      color: #ffcccc;
+    }
+
+    &__element {
+      list-style-type: none;
+      padding: 15px;
+      color: $blueColor;
+      font-size: 18px;
+    }
+  }
+}

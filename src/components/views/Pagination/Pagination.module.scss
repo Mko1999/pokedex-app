@@ -1,0 +1,43 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/utils.scss";
+@import "../../../styles/breakpoints.scss";
+
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 60px;
+
+  @include breakpoint(laptop) {
+    padding-top: 50px;
+  }
+  @include breakpoint(tablet) {
+    padding-top: 40px;
+  }
+  @include breakpoint(phone) {
+    padding-top: 30px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+
+    ul {
+      @include flexCenter(row);
+    }
+  }
+  &__button {
+    list-style-type: none;
+    &__element {
+      width: 40px;
+      height: 34px;
+      background: $redColor;
+      border: none;
+      outline: none;
+    }
+  }
+  li {
+    list-style-type: none;
+  }
+}

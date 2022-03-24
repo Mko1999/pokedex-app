@@ -1,0 +1,40 @@
+@import "../../styles/variables.scss";
+@import "../../styles/utils.scss";
+@import "../../styles/breakpoints.scss";
+
+.pokemon_page {
+  padding-bottom: 100px;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 50px;
+
+    @include breakpoint(laptop) {
+      max-width: 100%;
+      margin: 0 40px;
+    }
+    @include breakpoint(laptop-small) {
+      max-width: 100%;
+      margin: 0 25px;
+    }
+    @include breakpoint(tablet) {
+      max-width: 100%;
+      margin: 0 25px;
+    }
+    @include breakpoint(small-phone) {
+      max-width: 100%;
+      margin: 0 30px;
+    }
+  }
+  &__goback {
+    @include flexCenter(row);
+
+    p {
+      a {
+        color: $redColor;
+        font-size: 20px;
+      }
+    }
+  }
+}

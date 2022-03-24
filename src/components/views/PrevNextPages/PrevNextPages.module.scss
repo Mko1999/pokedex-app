@@ -1,0 +1,41 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/utils.scss";
+
+.prev_next_pages {
+  // @include flexSpaceBetween(row);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  &__back {
+    @include flexCenter(row);
+
+    p {
+      a {
+        text-decoration: none;
+        color: $redColor;
+        font-size: 20px;
+      }
+    }
+  }
+  &__next {
+    @include flexCenter(row);
+
+    p {
+      a {
+        text-decoration: none;
+        color: $redColor;
+        font-size: 20px;
+      }
+    }
+  }
+  &__title {
+    font-size: 25px;
+    color: $redColor;
+  }
+  &__arrow {
+    margin-left: 5px;
+  }
+  &__left {
+    transform: rotate(180deg);
+  }
+}

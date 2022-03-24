@@ -1,0 +1,20 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/utils.scss";
+.pokemon_item {
+  @include flexCenter(column);
+  &__name {
+    color: $blackColor;
+    font-size: 20px;
+    margin-top: 8px;
+  }
+  &__number {
+    color: $greyColor;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  &__type {
+    margin-top: 4px;
+    font-size: 14px;
+    color: $redColor;
+  }
+}
