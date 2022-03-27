@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import classNames from "classnames";
 
+import { useOnOutsideClick } from "../../../hooks";
 import styles from "./ShowPerPage.module.scss";
 import Arrow from "../../../assets/arrow.svg";
 import { PAGINATION_LIMIT_OPTIONS } from "../../../constants";
@@ -12,14 +13,33 @@ const ShowPerPage: React.FC = () => {
     setVisible(!visible);
   };
 
-  const iconClassname = visible
-    ? styles.show_per_page__container__arrow
-    : styles.show_per_page__container__arrow_active;
+  const iconClassname = classNames(styles.show_per_page__container__arrow, {
+    [styles.show_per_page__container__arrow_active]: visible,
+  });
 
   const dropdownClassname = classNames(
     styles.show_per_page__container__dropdown,
     { [styles.show_per_page__container__dropdown_active]: visible }
   );
+
+  const dropButtonClassname = classNames(
+    styles.show_per_page__container__dropbutton,
+    {
+      [styles.show_per_page__container__dropbutton_active]: visible,
+    }
+  );
+
+  const titleClassname = classNames(styles.show_per_page__container__title, {
+    [styles.show_per_page__container__title_active]: visible,
+  });
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const clickOutsidehandler = () => {
+    setVisible(false);
+  };
+
+  useOnOutsideClick(dropdownRef, clickOutsidehandler);
 
   return (
     <div className={styles.show_per_page}>
@@ -28,14 +48,11 @@ const ShowPerPage: React.FC = () => {
         <div
           role="button"
           onClick={toggleVisible}
-          className={styles.show_per_page__container__dropbutton}
+          className={dropButtonClassname}
+          ref={dropdownRef}
         >
-          <p className={styles.show_per_page__container__title}>20</p>
-          <img
-            alt="arrow"
-            src={Arrow}
-            className={styles.show_per_page__container__arrow}
-          />
+          <p className={titleClassname}>20</p>
+          <img alt="arrow" src={Arrow} className={iconClassname} />
           <ul className={dropdownClassname}>
             {PAGINATION_LIMIT_OPTIONS.map((limit) => {
               return (

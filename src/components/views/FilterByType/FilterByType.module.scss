@@ -11,7 +11,8 @@
     padding: 8px;
     @include flexSpaceAround(row);
     cursor: pointer;
-    box-shadow: $boxShadow;
+    // box-shadow: $boxShadow;
+    color: $yellowColor;
     height: 40px;
     box-sizing: border-box;
     width: 100%;
@@ -23,29 +24,35 @@
   &__title {
     font-size: 16px;
     color: $redColor;
+
+    @include breakpoint(tablet){
+      color: $yellowColor;
+      font-size: 20px;
+    }
   }
   &__arrow {
-    color: $redColor;
+    color: $yellowColor !important;
     transition: .4s ease;
-    transform: rotate(-90deg);
+    transform: rotate(90deg);
     
     &__active{
-      transform: rotate(90deg);
+      transform: rotate(-90deg);
       transition: .4s ease;
+      color: $yellowColor;
       
     }
   }
   &__dropdown {
     position: absolute;
     top: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: none;
     box-shadow: $boxShadow;
     background: #ffcccc;
     border-radius: 6px;
     z-index: 5;
     &__active {
-      display: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
     }
 
     &:hover {
@@ -60,6 +67,7 @@
       padding: 15px;
       color: $blueColor;
       font-size: 18px;
+    
     }
   }
 }

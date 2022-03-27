@@ -12,11 +12,17 @@
   &__container {
     @include flexSpaceAround(row);
     width: 100%;
+    transition: .4s ease-in-out;
 
     &__title {
       font-size: 16px;
       color: $redColor;
       padding-right: 5px;
+      margin: 0 !important;
+
+      &_active{
+        color: $whiteColor;
+      }
     }
     &__arrow {
       transform: rotate(90deg);
@@ -32,12 +38,24 @@
       @include flexCenter(row);
       position: relative;
       cursor: pointer;
+
+      &_active{
+        background: $redColor;
+        color: $whiteColor;
+      }
     }
 
     &__dropdown {
       position: absolute;
       top: 100%;
       display: none;
+      margin: 0 !important;
+      padding: 0 !important;
+      left: 0;
+      width: 100%;
+      background: $redColor;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
 
       &_active{
         display: block;
@@ -45,6 +63,11 @@
 
       &__element {
         list-style-type: none;
+        padding: 10px;
+        color: $whiteColor;
+        text-align: center;
+       
+        
       }
     }
   }  

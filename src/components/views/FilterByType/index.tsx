@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import classNames from "classnames";
+
 import styles from "./FilterByType.module.scss";
+import { useOnOutsideClick } from "../../../hooks";
 
 import Arrow from "../../../assets/arrow.svg";
 
@@ -11,12 +14,21 @@ const FilterByType: React.FC = () => {
     setVisible(!visible);
   };
 
-  const dropdownClassname = visible
-    ? styles.filter_by_type__dropdown
-    : styles.filter_by_type__dropdown__active;
-  const iconClassname = visible
-    ? styles.filter_by_type__arrow
-    : styles.filter_by_type__arrow__active;
+  const dropdownClassname = classNames(styles.filter_by_type__dropdown, {
+    [styles.filter_by_type__dropdown__active]: visible,
+  });
+
+  const iconClassname = classNames(styles.filter_by_type__arrow, {
+    [styles.filter_by_type__arrow__active]: visible,
+  });
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const clickOutsidehandler = () => {
+    setVisible(false);
+  };
+
+  useOnOutsideClick(dropdownRef, clickOutsidehandler);
 
   return (
     <div className={styles.filter_by_type}>
@@ -28,7 +40,7 @@ const FilterByType: React.FC = () => {
         <p className={styles.filter_by_type__title}>All types</p>
         <img alt="arrow" src={Arrow} className={iconClassname}></img>
 
-        <div className={dropdownClassname}>
+        <div ref={dropdownRef} className={dropdownClassname}>
           <li className={styles.filter_by_type__dropdown__element}>Normal</li>
           <li className={styles.filter_by_type__dropdown__element}>Fighting</li>
         </div>
