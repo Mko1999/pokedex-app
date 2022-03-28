@@ -7,9 +7,7 @@ import { useSelector } from "react-redux";
 import { pokemonSelector } from "../../../store/selectors";
 import { PokemonCardProps } from "./types";
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ name, url }) => {
-  // const pokemon = useSelector(pokemonSelector);
-
+const PokemonCard: React.FC<PokemonCardProps> = ({ name, url, image }) => {
   return (
     <div className={styles.pokemon_card}>
       <Link to={url || "/"}>
@@ -20,7 +18,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, url }) => {
                 draggable="false"
                 alt="Pokemon"
                 className={styles.pokemon_card__container__img}
-                src={Sample}
+                src={image}
               ></img>
             </div>
           </div>

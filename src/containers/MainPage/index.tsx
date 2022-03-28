@@ -8,6 +8,7 @@ import {
   ShowPerPage,
   PokemonCard,
   Pagination,
+  PokemonCards,
 } from "../../components/views";
 import { fetchPokemon, fetchPokemons, setOffset } from "../../store/actions";
 import {
@@ -105,10 +106,7 @@ const MainPage: React.FC = () => {
           </div>
         ) : (
           <div className={styles.main_page__all_pokemons}>
-            <PokemonCard
-              name={allPokemons[3]?.name}
-              url={allPokemons[3]?.url}
-            />
+            <PokemonCards />
           </div>
         )}
 

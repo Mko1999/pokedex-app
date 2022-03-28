@@ -1,6 +1,7 @@
 export { default as FilterByType } from "./FilterByType";
 export { default as Pagination } from "./Pagination";
 export { default as PokemonCard } from "./PokemonCard";
+export { default as PokemonCards } from "./PokemonCards";
 export { default as PokemonEvolutions } from "./PokemonEvolutions";
 export { default as PokemonInfo } from "./PokemonInfo";
 export { default as PokemonItem } from "./PokemonItem";
