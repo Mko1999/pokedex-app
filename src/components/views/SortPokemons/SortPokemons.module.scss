@@ -3,10 +3,16 @@
 @import "../../../styles/breakpoints.scss";
 .sort_pokemons {
   position: relative;
-  width: 300px;
+  // width: 300px;
   &__container {
     @include flexCenter(row);
     padding: 8px;
+
+    &_active{
+     background: $redColor;
+     border-top-left-radius: 8px;
+     border-top-right-radius: 8px;
+    }
 
     // @include breakpoint(laptop-small) {
     //   justify-content: flex-end;
@@ -19,6 +25,10 @@
       font-size: 16px;
       padding-right: 5px;
       cursor: pointer;
+
+      &_active{
+        color: $whiteColor;
+      }
       @include breakpoint(tablet) {
         padding-right: 6px;
         color: $yellowColor;
@@ -42,7 +52,7 @@
     margin: 0 auto !important;
     padding: 0 !important;
     background: $redColor;
-    width: 90%;
+    width: 100%;
     display: none;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
@@ -51,6 +61,7 @@
 
     &_active{
       display: block;
+      transition: .4s ease-in-out;
     }
     &__element {
       list-style-type: none;

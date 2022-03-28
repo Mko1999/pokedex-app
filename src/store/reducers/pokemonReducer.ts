@@ -8,11 +8,12 @@ export const FETCH_POKEMONS_SUCCESS = "FETCH_POKEMONS_SUCCESS";
 export const FETCH_POKEMONS_REQUEST = "FETCH_POKEMONS_REQUEST";
 export const FETCH_POKEMONS_ERROR = "FETCH_POKEMONS_ERROR";
 export const FETCH_POKEMON_ERROR = "FETCH_POKEMON_ERROR";
-export const FETCH_POKEMON_SUCCESS = "FETCH_POKEMON_SUCCESS";
 export const FETCH_POKEMON_REQUEST = "FETCH_POKEMON_REQUEST";
+export const FETCH_POKEMON_SUCCESS = "FETCH_POKEMON_SUCCESS";
 export const OFFSET_CHANGE = "OFFSET_CHANGE";
 export const LIMIT_CHANGE = "LIMIT_CHANGE";
 export const SEARCH_CHANGE = "SEARCH_CHANGE";
+export const SORT_BY_CHANGE = "SORT_BY_CHANGE";
 
 const initialState: IPokemonState = {
   allPokemons: [],
@@ -58,6 +59,13 @@ const pokemonReducer = (
       };
     }
 
+    case OFFSET_CHANGE: {
+      return {
+        ...state,
+        offset: payload,
+      };
+    }
+
     case FETCH_POKEMON_REQUEST: {
       return {
         ...state,
@@ -85,10 +93,10 @@ const pokemonReducer = (
       };
     }
 
-    case OFFSET_CHANGE: {
+    case SORT_BY_CHANGE: {
       return {
         ...state,
-        offset: payload,
+        sortBy: payload,
       };
     }
 

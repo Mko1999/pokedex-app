@@ -10,6 +10,7 @@ import Arrow from "../../../assets/arrow.svg";
 const FilterByType: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const dispatch = useDispatch();
+
   const handleDropdown = () => {
     setVisible(!visible);
   };

@@ -8,9 +8,9 @@ const App: React.FC = () => {
     <BrowserRouter>
       <div className={styles.app}>
         <Routes>
+          <Route path="/pokemon/:id" element={<PokemonPage />} />
           <Route path="/" element={<MainPage />} />
-          <Route path="/pokemon" element={<PokemonPage />} />
-          <Route element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </BrowserRouter>

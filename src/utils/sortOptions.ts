@@ -1,5 +1,5 @@
 export const LOWEST_TO_HIGHEST_NUMBER = "Lowest to highest number";
-export const HIGHEST_TO_LOWEST_NUMBER = "Highest to highest number";
+export const HIGHEST_TO_LOWEST_NUMBER = "Highest to lowest number";
 export const A_Z = "A-Z";
 export const Z_A = "Z-A";
 

@@ -6,13 +6,22 @@ import React from "react";
 const ErrorPage: React.FC = () => {
   return (
     <div className={styles.error_page}>
-      <img alt="Error" src={errorPic} className={styles.error_page__pic} />
-      <div className={styles.error_page__info}>
-        <h2>
-          OOPS! <span> This page is not found</span>
-        </h2>
+      <div className={styles.error_page__container}>
+        <img
+          alt="Error"
+          src={errorPic}
+          className={styles.error_page__container__pic}
+          draggable="false"
+        />
+        <div className={styles.error_page__container__info}>
+          <h2 className={styles.error_page__container__info__text}>
+            OOPS! <span> This page is not found</span>
+          </h2>
+          <p className={styles.error_page__container__info__back}>
+            <Link to="/">Go To Home</Link>
+          </p>
+        </div>
       </div>
-      <Link to="/">Go To</Link>
     </div>
   );
 };

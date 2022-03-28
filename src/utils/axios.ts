@@ -8,5 +8,5 @@ const api = axios.create({
 
 const axiosInstance = axios.create();
 
-export default api;
 export { axiosInstance as axios };
+export default api;

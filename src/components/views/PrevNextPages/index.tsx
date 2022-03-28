@@ -19,11 +19,11 @@ const PrevNextPages: React.FC = () => {
           <Link to="/">Pokemon name and number</Link>
         </p>
       </div>
-      <div className={styles.prev_next_pages__title}>
-        <h1>Pokemon name</h1>
+      <div>
+        <h1 className={styles.prev_next_pages__title}>Pokemon name</h1>
       </div>
       <div className={styles.prev_next_pages__next}>
-        <p>
+        <p className={styles.prev_next_pages__next__text}>
           <Link to="/">Pokemon name and number</Link>
         </p>
         <img

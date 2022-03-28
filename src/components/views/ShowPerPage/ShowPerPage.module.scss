@@ -40,7 +40,7 @@
       cursor: pointer;
 
       &_active{
-        background: $redColor;
+        background: $orangeColor;
         color: $whiteColor;
       }
     }
@@ -66,6 +66,11 @@
         padding: 10px;
         color: $whiteColor;
         text-align: center;
+
+        &:hover{
+          color: $redColor;
+          background: $whiteColor;
+        }
        
         
       }

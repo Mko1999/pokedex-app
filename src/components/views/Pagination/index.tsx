@@ -1,15 +1,42 @@
 import React from "react";
-import styles from "./Pagination.module.scss";
-import { Button } from "../../../components/shared";
-import { CaretLeftFill, CaretRightFill } from "react-bootstrap-icons";
 import { motion } from "framer-motion";
+import { CaretLeftFill, CaretRightFill } from "react-bootstrap-icons";
 
-const Pagination: React.FC = () => {
-  const handlePreviousPage = () => {
-    console.log("Go to previous page");
-  };
+import styles from "./Pagination.module.scss";
+import { PaginationProps } from "./types";
 
-  const paginationList = <li>1</li>;
+import { getButtonsArray } from "../../../utils";
+import { Button } from "../../../components/shared";
+
+const Pagination: React.FC<PaginationProps> = ({
+  limit,
+  offset,
+  totalCount,
+  handleNextPage,
+  handlePreviousPage,
+  handlePageChange,
+}) => {
+  const countOfPages = Math.ceil(totalCount / limit);
+
+  const buttonsArray = getButtonsArray(countOfPages, offset);
+  console.log(buttonsArray, "ss");
+
+  const paginationList = buttonsArray.map((item) => {
+    const buttonClass =
+      offset === item
+        ? styles.pagination__container__btns__btn_active
+        : styles.pagination__container__btns__btn;
+    return (
+      <Button
+        className={buttonClass}
+        onClick={handlePageChange}
+        dataAttribute={item}
+        key={item}
+      >
+        {item}
+      </Button>
+    );
+  });
 
   return (
     <div className={styles.pagination}>
@@ -31,7 +58,17 @@ const Pagination: React.FC = () => {
             </Button>
           </motion.li>
           {paginationList}
-          <motion.li>
+          <motion.li
+            whileFocus={{ opacity: "0.7" }}
+            whileTap={{
+              boxShadow: "10px 10px 0 rgba(0, 0, 0, 0.2)",
+              background:
+                "linear-gradient(160deg, #0093E9 0%, #80D0C7 33%, #ffffff 66%, #ffffff 100%)",
+            }}
+            transition={{ duration: 2 }}
+            onClick={handleNextPage}
+            className={styles.pagination__button__next}
+          >
             <Button className={styles.pagination__button__element}>
               <CaretRightFill size="34" color="#fff" />
             </Button>

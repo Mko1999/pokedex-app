@@ -36,54 +36,6 @@ const PokemonInfo: React.FC = () => {
         </p>
         <div className={styles.pokemon_info__mainInfo__advanced}>
           {pokemonInformationDiv}
-          {/* <div className={styles.pokemon_info__mainInfo__advanced__item}>
-            <p className={styles.pokemon_info__mainInfo__advanced__text}>
-              Height
-            </p>
-            <p className={styles.pokemon_info__mainInfo__advanced__title}>
-              Some info
-            </p>
-          </div>
-          <div className={styles.pokemon_info__mainInfo__advanced__item}>
-            <p className={styles.pokemon_info__mainInfo__advanced__text}>
-              Height
-            </p>
-            <p className={styles.pokemon_info__mainInfo__advanced__title}>
-              Some info
-            </p>
-          </div>
-          <div className={styles.pokemon_info__mainInfo__advanced__item}>
-            <p className={styles.pokemon_info__mainInfo__advanced__text}>
-              Height
-            </p>
-            <p className={styles.pokemon_info__mainInfo__advanced__title}>
-              Some info
-            </p>
-          </div>
-          <div className={styles.pokemon_info__mainInfo__advanced__item}>
-            <p className={styles.pokemon_info__mainInfo__advanced__text}>
-              Height
-            </p>
-            <p className={styles.pokemon_info__mainInfo__advanced__title}>
-              Some info
-            </p>
-          </div>
-          <div className={styles.pokemon_info__mainInfo__advanced__item}>
-            <p className={styles.pokemon_info__mainInfo__advanced__text}>
-              Height
-            </p>
-            <p className={styles.pokemon_info__mainInfo__advanced__title}>
-              Some info
-            </p>
-          </div>
-          <div className={styles.pokemon_info__mainInfo__advanced__item}>
-            <p className={styles.pokemon_info__mainInfo__advanced__text}>
-              Height
-            </p>
-            <p className={styles.pokemon_info__mainInfo__advanced__title}>
-              Some info
-            </p>
-          </div> */}
         </div>
         <PokemonStats />
       </div>

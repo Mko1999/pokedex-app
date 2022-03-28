@@ -1,1 +1,8 @@
-export { setOffset, setLimit, setSearch } from "./pokemonActions";
+export {
+  setOffset,
+  setLimit,
+  setSearch,
+  setSortBy,
+  fetchPokemons,
+  fetchPokemon,
+} from "./pokemonActions";

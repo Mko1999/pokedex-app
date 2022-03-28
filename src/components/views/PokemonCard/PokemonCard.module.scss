@@ -10,11 +10,16 @@
 
   &__container {
     background: #bca48f36;
-    @include flexCenter(row);
+    @include flexCenter(column);
     border-radius: 10px;
     user-select: none;
     cursor: pointer;
     padding: 15px;
+    &__name {
+      color: $blackColor;
+      font-size: 20px;
+      margin-top: 8px;
+    }
 
     &__background {
       position: relative;

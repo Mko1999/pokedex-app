@@ -8,10 +8,9 @@
   width: 120px;
 
   &__container {
-    padding: 8px;
     @include flexSpaceAround(row);
+    padding: 8px;
     cursor: pointer;
-    // box-shadow: $boxShadow;
     color: $yellowColor;
     height: 40px;
     box-sizing: border-box;
@@ -67,7 +66,6 @@
       padding: 15px;
       color: $blueColor;
       font-size: 18px;
-    
     }
   }
 }

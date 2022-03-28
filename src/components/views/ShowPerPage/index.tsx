@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
 import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useOnOutsideClick } from "../../../hooks";
 import styles from "./ShowPerPage.module.scss";
 import Arrow from "../../../assets/arrow.svg";
 import { PAGINATION_LIMIT_OPTIONS } from "../../../constants";
+import { setLimit } from "../../../store/actions";
+import { limitSelector } from "../../../store/selectors";
 
 const ShowPerPage: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -12,6 +15,8 @@ const ShowPerPage: React.FC = () => {
   const toggleVisible = (): void => {
     setVisible(!visible);
   };
+
+  const dispatch = useDispatch();
 
   const iconClassname = classNames(styles.show_per_page__container__arrow, {
     [styles.show_per_page__container__arrow_active]: visible,
@@ -33,6 +38,27 @@ const ShowPerPage: React.FC = () => {
     [styles.show_per_page__container__title_active]: visible,
   });
 
+  const limit = useSelector(limitSelector);
+
+  const handleLimitChange = (e: any) => {
+    const limitValue = e.target.dataset.value;
+    dispatch(setLimit(limitValue));
+  };
+
+  const limitOptions = PAGINATION_LIMIT_OPTIONS.map((limit) => {
+    return (
+      <li
+        key={limit}
+        className={styles.show_per_page__container__dropdown__element}
+        role="button"
+        onClick={handleLimitChange}
+        data-value={limit}
+      >
+        {limit}
+      </li>
+    );
+  });
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const clickOutsidehandler = () => {
@@ -51,20 +77,9 @@ const ShowPerPage: React.FC = () => {
           className={dropButtonClassname}
           ref={dropdownRef}
         >
-          <p className={titleClassname}>20</p>
+          <p className={titleClassname}>{limit}</p>
           <img alt="arrow" src={Arrow} className={iconClassname} />
-          <ul className={dropdownClassname}>
-            {PAGINATION_LIMIT_OPTIONS.map((limit) => {
-              return (
-                <li
-                  key={limit}
-                  className={styles.show_per_page__container__dropdown__element}
-                >
-                  {limit}
-                </li>
-              );
-            })}
-          </ul>
+          <ul className={dropdownClassname}>{limitOptions}</ul>
         </div>
       </div>
     </div>

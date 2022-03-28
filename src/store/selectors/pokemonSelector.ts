@@ -1,5 +1,3 @@
-// import { IPokemonState } from "./../reducers/types";
-
 import { NameURL } from "../../types";
 
 export const pokemonsSelector = (state: any): NameURL[] =>
@@ -18,8 +16,6 @@ export const offsetSelector = (state: any) => state.pokemon.offset;
 export const limitSelector = (state: any) => state.pokemon.limit;
 
 export const searchValueSelector = (state: any) => state.pokemon.searchValue;
-
-export const filterSearchSelector = (state: any) => state.pokemon.filterSearch;
 
 export const filterTypeSelector = (state: any) => state.pokemon.fiterType;
 

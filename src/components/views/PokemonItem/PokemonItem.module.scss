@@ -2,11 +2,7 @@
 @import "../../../styles/utils.scss";
 .pokemon_item {
   @include flexCenter(column);
-  &__name {
-    color: $blackColor;
-    font-size: 20px;
-    margin-top: 8px;
-  }
+  
   &__number {
     color: $greyColor;
     font-size: 14px;

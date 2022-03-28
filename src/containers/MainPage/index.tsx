@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { Loader, SearchBar } from "../../components/shared";
 import {
   FilterByType,
@@ -8,23 +9,23 @@ import {
   PokemonCard,
   Pagination,
 } from "../../components/views";
-import {
-  fetchPokemon,
-  fetchPokemons,
-} from "../../store/actions/pokemonActions";
+import { fetchPokemon, fetchPokemons, setOffset } from "../../store/actions";
 import {
   limitSelector,
+  loadingSelector,
   offsetSelector,
   pokemonsSelector,
   sortBySelector,
 } from "../../store/selectors";
 import { NameURL } from "../../types";
+import { axios } from "../../utils";
 import {
   A_Z,
   HIGHEST_TO_LOWEST_NUMBER,
   LOWEST_TO_HIGHEST_NUMBER,
   Z_A,
 } from "../../utils/sortOptions";
+
 import styles from "./MainPage.module.scss";
 
 const MainPage: React.FC = () => {
@@ -34,24 +35,30 @@ const MainPage: React.FC = () => {
     dispatch(fetchPokemons());
   }, [dispatch]);
 
-  const pokemons = useSelector(pokemonsSelector);
+  const allPokemons = useSelector(pokemonsSelector);
+  console.log(allPokemons, "dd");
   const offset = useSelector(offsetSelector);
   const limit = useSelector(limitSelector);
   const sortBy = useSelector(sortBySelector);
+  const loading = useSelector(loadingSelector);
+  const buttonsCount = Math.ceil(allPokemons.length / limit);
 
-  const getUrls = () => {
+  //  const memoizedLink =useMemo(()=>{
+
+  //  },[url])
+  const getUrls = (allPokemons: NameURL[]) => {
     switch (sortBy) {
       case LOWEST_TO_HIGHEST_NUMBER:
-        return pokemons.slice(offset, limit).map((item) => item.url);
+        return allPokemons.slice(offset, limit).map((item) => item.url);
       case HIGHEST_TO_LOWEST_NUMBER:
-        return pokemons.slice(-offset, -limit).map((item) => item.url);
+        return allPokemons.slice(-offset, -limit).map((item) => item.url);
       case A_Z:
-        return pokemons
+        return allPokemons
           .sort((a, b) => a.name.localeCompare(b.name))
           .slice(offset, limit)
           .map((item: NameURL) => item.url);
       case Z_A:
-        return pokemons
+        return allPokemons
           .sort((a, b) => b.name.localeCompare(a.name))
           .slice(offset, limit)
           .map((item: NameURL) => item.url);
@@ -60,15 +67,27 @@ const MainPage: React.FC = () => {
     }
   };
 
-  const urls = getUrls();
-
   useEffect(() => {
+    const urls = getUrls(allPokemons);
     dispatch(fetchPokemon(urls));
-  }, [dispatch, urls]);
+  }, [dispatch, offset, limit, sortBy, allPokemons]);
 
-  // const pokemonList = pokemons.map((pokemon)=>{
-  //   return <PokemonCard
-  // })
+  const handlePreviousPage = () => {
+    if (offset !== 1) {
+      dispatch(setOffset(offset - 1));
+    }
+  };
+
+  const handleNextPage = () => {
+    if (offset !== buttonsCount) {
+      dispatch(setOffset(offset + 1));
+    }
+  };
+
+  const handlePageChange = (e: any) => {
+    const pageNumber = Number(e.target.dataset.attribute);
+    dispatch(setOffset(pageNumber));
+  };
 
   return (
     <div className={styles.main_page}>
@@ -80,13 +99,27 @@ const MainPage: React.FC = () => {
           <SortPokemons />
           <ShowPerPage />
         </div>
-        <div className={styles.main_page__all_pokemons}>
-          <PokemonCard />
-        </div>
-        <div>
-          <Loader />
-        </div>
-        <Pagination />
+        {loading ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <div className={styles.main_page__all_pokemons}>
+            <PokemonCard
+              name={allPokemons[3]?.name}
+              url={allPokemons[3]?.url}
+            />
+          </div>
+        )}
+
+        <Pagination
+          limit={limit}
+          offset={offset}
+          totalCount={allPokemons.length}
+          handleNextPage={handleNextPage}
+          handlePreviousPage={handlePreviousPage}
+          handlePageChange={handlePageChange}
+        />
       </div>
     </div>
   );

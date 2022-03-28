@@ -5,9 +5,11 @@ import {
   PokemonInfo,
   PokemonEvolutions,
 } from "../../components/views";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const PokemonPage = () => {
+  const { id } = useParams();
+
   return (
     <div className={styles.pokemon_page}>
       <div className={styles.pokemon_page__container}>
