@@ -2,33 +2,43 @@
 @import "../../../styles/utils.scss";
 @import "../../../styles/breakpoints.scss";
 
-
 .filter_by_type {
   position: relative;
   width: 120px;
 
+  @include breakpoint(tablet){
+    width: 100%;
+  }
+
   &__container {
-    @include flexSpaceAround(row);
+    @include flexCenter(row);
     padding: 8px;
     cursor: pointer;
     color: $yellowColor;
-    height: 40px;
-    box-sizing: border-box;
+    height: 30px;
     width: 100%;
     border-radius: 8px;
+
+    &__active{
+      background: $pokBackgroundColor;
+    }
     @include breakpoint(tablet) {
       margin: 20px 0 10px;
     }
   }
+
   &__title {
     font-size: 16px;
     color: $redColor;
+    padding-right: 5px;
 
     @include breakpoint(tablet){
-      color: $yellowColor;
+      color: $darkGreenColor;
       font-size: 20px;
+      padding-right: 8px;
     }
   }
+
   &__arrow {
     color: $yellowColor !important;
     transition: .4s ease;
@@ -38,9 +48,9 @@
       transform: rotate(-90deg);
       transition: .4s ease;
       color: $yellowColor;
-      
     }
   }
+
   &__dropdown {
     position: absolute;
     top: 100%;
@@ -49,6 +59,7 @@
     background: #ffcccc;
     border-radius: 6px;
     z-index: 5;
+
     &__active {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -57,6 +68,7 @@
     &:hover {
       background: $blueColor;
     }
+    
     &:hover &__element {
       color: #ffcccc;
     }

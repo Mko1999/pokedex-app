@@ -8,15 +8,15 @@ const PokemonEvolutions: React.FC = () => {
     <div className={styles.pokemon_evolutions}>
       <h3 className={styles.pokemon_evolutions__title}>Evolutions</h3>
       <div className={styles.pokemon_evolutions__container}>
-        <PokemonCard />
+        {/* <PokemonCard /> */}
         <div className={styles.pokemon_evolutions__container__arrow}>
           <ArrowRightSquare fill="#ff6f61" size="25" />
         </div>
-        <PokemonCard />
+        {/* <PokemonCard /> */}
         <div className={styles.pokemon_evolutions__container__arrow}>
           <ArrowRightSquare fill="#ff6f61" size="25" />
         </div>
-        <PokemonCard />
+        {/* <PokemonCard /> */}
       </div>
     </div>
   );

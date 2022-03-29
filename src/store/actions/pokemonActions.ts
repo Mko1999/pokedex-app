@@ -60,7 +60,6 @@ export const fetchPokemons = () => async (dispatch: any) => {
   try {
     const data = await getAllPokemonsData();
     await new Promise((res) => setTimeout(res, 1000));
-    console.log(data, "data");
     dispatch(fetchPokemonsSuccess(data));
   } catch (e) {
     if (e instanceof Error) dispatch(fetchPokemonsError(e.message));
@@ -68,10 +67,10 @@ export const fetchPokemons = () => async (dispatch: any) => {
 };
 
 export const fetchPokemon = (urls: string[]) => async (dispatch: any) => {
-  // return;
   dispatch(fetchPokemonRequest());
   try {
     const data = await Promise.all(urls.map((url) => getPokemonUrls(url)));
+    await new Promise((res) => setTimeout(res, 2000));
     dispatch(fetchPokemonSuccess(data));
   } catch (e) {
     if (e instanceof Error) {

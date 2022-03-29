@@ -1,24 +1,50 @@
 @import "../../../styles/variables.scss";
 @import "../../../styles/utils.scss";
+@import "../../../styles/animations.scss";
+
+.parent{
+  perspective: 1000px;
+  min-height: 280px;
+  height: 320px;
+}
+
+.child{
+width: 100%;
+height: 100%;
+transition: transform 1s ease-in-out;
+transition-delay: .4s;
+transform-style: preserve-3d;
+position: relative;
+
+&:hover{
+  transform: rotateY(180deg);
+  transition-delay: 0;
+}
+  }
 
 .pokemon_card {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   box-shadow: $boxShadow;
   border-radius: 8px;
-  min-height: 280px;
   background: linear-gradient(45deg, #fbe5dc, #fff);
-
+  backface-visibility: hidden;
+  overflow: hidden;
+  
   &__container {
     background: #bca48f36;
     @include flexCenter(column);
     border-radius: 10px;
     user-select: none;
     cursor: pointer;
-    padding: 15px;
+    padding: 9px;
+
     &__name {
-      color: $blackColor;
+      color: $redColor;
       font-size: 20px;
       margin-top: 8px;
+      text-transform: capitalize;
     }
 
     &__background {
@@ -37,5 +63,100 @@
         }
       }
     }
+
+    &__item {
+      @include flexCenter(column);
+      width: 100%;
+      background: $pokBackgroundColor;
+      border-radius: 20px;
+      min-height: 75px;
+      height: 75px;
+      
+      &__number {
+        color: $coffeeColor;
+        font-size: 16px;
+        padding-top: 6px;
+        font-weight: 700;
+      }
+      
+      &__type {
+        margin-top: 4px;
+        font-size: 20px;
+        color:$coffeeColor;
+        padding-bottom: 6px;
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  a{
+    text-decoration: none;
+  }
+}
+
+.pokemon_card__back{
+  position: absolute;
+  box-shadow: $boxShadow;
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+  background: $preserve3DColor;
+  backface-visibility: hidden;
+  overflow: hidden;
+  transform: rotateY(180deg);
+   
+  &__container {
+    background: #bca48f36;
+    @include flexCenter(column);
+    border-radius: 10px;
+    user-select: none;
+    cursor: pointer;
+    padding: 9px;
+
+    &__heading{
+      margin: 0 !important;
+      color: $pinkColor;
+    }
+
+    &__name {
+      color: $pinkColor;
+      font-weight: 700;
+      font-size: 20px;
+      margin-top: 8px;
+      text-transform: capitalize;
+    }
+
+    &__item {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      place-items: center;
+      width: 100%;
+      background: $pokBackgroundColor;
+      border-radius: 20px;
+      min-height: 75px;
+
+      &__number {
+        color: $coffeeColor;
+        font-size: 16px;
+        padding-top: 6px;
+        font-weight: 700;
+      }
+
+      &__type {
+        margin-top: 4px;
+        font-size: 20px;
+        color:$coffeeColor;
+        padding-bottom: 6px;
+        text-transform: capitalize;
+      }
+
+      p{
+        color: $coffeeColor;
+      }
+    }
+  }
+
+  a{
+    text-decoration: none;
   }
 }

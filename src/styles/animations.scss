@@ -1,9 +1,12 @@
 @keyframes rotate {
-    from {
-      transform: rotate(0);
+    50%{
+      transform: scale(0.98);
+      transition: 2s ease-in-out;
     }
-    to {
-      transform: rotate(360deg);
+
+    100% {
+      transform: rotateZ(0deg);
+      transform: rotateY(0deg);
     }
   }
   

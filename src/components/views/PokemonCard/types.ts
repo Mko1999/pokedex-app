@@ -1,4 +1,4 @@
 export type PokemonCardProps = {
-  name?: string | undefined;
-  url?: string | undefined;
+  pokemon: any;
+  id: number;
 };

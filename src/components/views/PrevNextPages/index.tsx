@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import styles from "./PrevNextPages.module.scss";
 import Arrow from "../../../assets/arrow.svg";
-import { Link } from "react-router-dom";
 
 const PrevNextPages: React.FC = () => {
   return (

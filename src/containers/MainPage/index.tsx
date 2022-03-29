@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Loader, SearchBar } from "../../components/shared";
@@ -6,7 +6,6 @@ import {
   FilterByType,
   SortPokemons,
   ShowPerPage,
-  PokemonCard,
   Pagination,
   PokemonCards,
 } from "../../components/views";
@@ -19,7 +18,6 @@ import {
   sortBySelector,
 } from "../../store/selectors";
 import { NameURL } from "../../types";
-import { axios } from "../../utils";
 import {
   A_Z,
   HIGHEST_TO_LOWEST_NUMBER,
@@ -32,21 +30,26 @@ import styles from "./MainPage.module.scss";
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchPokemons());
-  }, [dispatch]);
-
   const allPokemons = useSelector(pokemonsSelector);
-  console.log(allPokemons, "dd");
   const offset = useSelector(offsetSelector);
   const limit = useSelector(limitSelector);
   const sortBy = useSelector(sortBySelector);
   const loading = useSelector(loadingSelector);
+  const currentPage = (offset + limit) / limit;
   const buttonsCount = Math.ceil(allPokemons.length / limit);
 
-  //  const memoizedLink =useMemo(()=>{
+  console.log(limit, "limit");
+  console.log(offset, "offset");
+  console.log(buttonsCount, "buttonsCount");
+  console.log(currentPage, "current");
 
-  //  },[url])
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(fetchPokemons());
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [dispatch]);
+
   const getUrls = (allPokemons: NameURL[]) => {
     switch (sortBy) {
       case LOWEST_TO_HIGHEST_NUMBER:
@@ -74,14 +77,14 @@ const MainPage: React.FC = () => {
   }, [dispatch, offset, limit, sortBy, allPokemons]);
 
   const handlePreviousPage = () => {
-    if (offset !== 1) {
-      dispatch(setOffset(offset - 1));
+    if (currentPage !== 1) {
+      dispatch(setOffset((currentPage - 2) * limit));
     }
   };
 
   const handleNextPage = () => {
-    if (offset !== buttonsCount) {
-      dispatch(setOffset(offset + 1));
+    if (currentPage !== buttonsCount) {
+      dispatch(setOffset(currentPage * limit));
     }
   };
 
@@ -100,15 +103,7 @@ const MainPage: React.FC = () => {
           <SortPokemons />
           <ShowPerPage />
         </div>
-        {loading ? (
-          <div>
-            <Loader />
-          </div>
-        ) : (
-          <div className={styles.main_page__all_pokemons}>
-            <PokemonCards />
-          </div>
-        )}
+        {loading ? <Loader /> : <PokemonCards />}
 
         <Pagination
           limit={limit}

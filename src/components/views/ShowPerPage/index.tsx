@@ -2,9 +2,10 @@ import React, { useState, useRef } from "react";
 import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useOnOutsideClick } from "../../../hooks";
 import styles from "./ShowPerPage.module.scss";
 import Arrow from "../../../assets/arrow.svg";
+
+import { useOnOutsideClick } from "../../../hooks";
 import { PAGINATION_LIMIT_OPTIONS } from "../../../constants";
 import { setLimit } from "../../../store/actions";
 import { limitSelector } from "../../../store/selectors";

@@ -2,7 +2,6 @@
 @import "../../../styles/utils.scss";
 @import "../../../styles/breakpoints.scss";
 
-
 .pagination {
   display: flex;
   justify-content: flex-end;
@@ -26,6 +25,7 @@
     ul {
       @include flexCenter(row);
     }
+
     &__btns{
      @include flexCenter(row);
 
@@ -40,16 +40,12 @@
         border-radius: 10px;
         color: $whiteColor;
 
+        @include breakpoint(phone){
+          width: 30px;
+        }
+
         &_active{
           background-color: pink;
-          width: 40px;
-          height: 40px;
-          border: none;
-          outline: none;
-          cursor: pointer;
-          margin: 0 5px;
-          border-radius: 10px;
-          color: $whiteColor;
         }
       }
     }
@@ -65,8 +61,13 @@
       outline: none;
       cursor: pointer;
       padding: 0 !important;
+
+      @include breakpoint(phone){
+        width: 30px;
+      }
     }
   }
+  
   li {
     list-style-type: none;
   }

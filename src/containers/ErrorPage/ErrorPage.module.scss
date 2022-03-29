@@ -16,14 +16,17 @@
           max-width: 100%;
           margin: 0 40px;
         }
+
         @include breakpoint(laptop-small) {
           max-width: 100%;
           margin: 0 25px;
         }
+
         @include breakpoint(tablet) {
           max-width: 100%;
           margin: 0 25px;
         }
+
         @include breakpoint(small-phone) {
           max-width: 100%;
           margin: 0 30px;
@@ -52,6 +55,7 @@
             }
 
             &__back{
+                
                 a{
                 font-size: 32px;
                 text-decoration: underline;

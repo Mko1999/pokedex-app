@@ -40,10 +40,3 @@ export const getEvolutionChain = async (id: number) => {
   const { data } = await api.get(`evolution-chain${id}`);
   return data.chain;
 };
-
-// console.log(getAllPokemonsData());
-// console.log(getPokemonData("bulbasaur"));
-// console.log(getPokemonSpecies(1), "aaa");
-// console.log(getFemalePokemons());
-// console.log(getMalePokemons());
-// console.log(getEvolutionChain(2));

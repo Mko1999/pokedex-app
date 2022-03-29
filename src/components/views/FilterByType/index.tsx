@@ -23,6 +23,10 @@ const FilterByType: React.FC = () => {
     [styles.filter_by_type__arrow__active]: visible,
   });
 
+  const containerClassname = classNames(styles.filter_by_type__container, {
+    [styles.filter_by_type__container__active]: visible,
+  });
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const clickOutsidehandler = () => {
@@ -36,7 +40,8 @@ const FilterByType: React.FC = () => {
       <div
         role="button"
         onClick={handleDropdown}
-        className={styles.filter_by_type__container}
+        className={containerClassname}
+        ref={dropdownRef}
       >
         <p className={styles.filter_by_type__title}>All types</p>
         <img alt="arrow" src={Arrow} className={iconClassname}></img>

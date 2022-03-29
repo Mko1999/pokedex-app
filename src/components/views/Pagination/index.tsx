@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
+import classNames from "classnames";
 import { CaretLeftFill, CaretRightFill } from "react-bootstrap-icons";
 
 import styles from "./Pagination.module.scss";
@@ -21,11 +22,22 @@ const Pagination: React.FC<PaginationProps> = ({
   const buttonsArray = getButtonsArray(countOfPages, offset);
   console.log(buttonsArray, "ss");
 
+  const memoizedValue = useMemo(() => {}, [
+    limit,
+    offset,
+    totalCount,
+    handleNextPage,
+    handlePageChange,
+    handlePreviousPage,
+  ]);
+
+  
+
   const paginationList = buttonsArray.map((item) => {
-    const buttonClass =
-      offset === item
-        ? styles.pagination__container__btns__btn_active
-        : styles.pagination__container__btns__btn;
+    const buttonClass = classNames(styles.pagination__container__btns__btn, {
+      [styles.pagination__container__btns__btn_active]: offset === item,
+    });
+
     return (
       <Button
         className={buttonClass}

@@ -1,4 +1,7 @@
-export const getButtonsArray = (buttonCount: number, currentPage: number) => {
+export const getButtonsArray = (
+  buttonCount: number,
+  currentPage: number
+): number[] => {
   let start: number, end: number;
 
   switch (currentPage) {
@@ -21,7 +24,7 @@ export const getButtonsArray = (buttonCount: number, currentPage: number) => {
     }
 
     default: {
-      start = currentPage - 2;
+      start = currentPage + 1;
       end = buttonCount < currentPage + 2 ? currentPage + 1 : currentPage + 2;
     }
   }

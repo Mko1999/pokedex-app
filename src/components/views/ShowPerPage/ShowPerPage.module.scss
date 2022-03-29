@@ -5,10 +5,10 @@
 .show_per_page {
   position: relative;
  
-
   @include breakpoint(laptop-small) {
     display: none;
   }
+
   &__container {
     @include flexSpaceAround(row);
     width: 100%;
@@ -19,11 +19,8 @@
       color: $redColor;
       padding-right: 5px;
       margin: 0 !important;
-
-      &_active{
-        color: $whiteColor;
-      }
     }
+
     &__arrow {
       transform: rotate(90deg);
       transition: .4s ease;
@@ -38,10 +35,14 @@
       @include flexCenter(row);
       position: relative;
       cursor: pointer;
+      padding: 6px;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      height: 30px;
 
       &_active{
-        background: $orangeColor;
-        color: $whiteColor;
+        background: $pokBackgroundColor;
+      
       }
     }
 
@@ -56,6 +57,7 @@
       background: $redColor;
       border-bottom-left-radius: 6px;
       border-bottom-right-radius: 6px;
+      z-index: 20;
 
       &_active{
         display: block;
@@ -69,10 +71,8 @@
 
         &:hover{
           color: $redColor;
-          background: $whiteColor;
+          background: $pokBackgroundColor;
         }
-       
-        
       }
     }
   }  

@@ -1,18 +1,24 @@
 import React from "react";
-import styles from "./PokemonCards.module.scss";
 import { useSelector } from "react-redux";
-import { pokemonSelector } from "../../../store/selectors";
-import PokemonCard from "../PokemonCard";
+import { PokemonCard } from "..";
+import { loadingSelector, pokemonSelector } from "../../../store/selectors";
+import { Loader } from "../../shared";
+import styles from "./PokemonCards.module.scss";
 
-const PokemonCards = () => {
+const PokemonCards: React.FC = () => {
   const pokemons = useSelector(pokemonSelector);
-  console.log(pokemons);
+  console.log(pokemons, "a");
+  const loading = useSelector(loadingSelector);
 
-  const pokemonCard = pokemons.map((pokemon: any) => {
-    return <PokemonCard key={pokemon.id} image ={pokemon.sprites.back_default} name={pokemon.name} />;
+  const singlePokemonCard = pokemons.map((pokemon: any) => {
+    return <PokemonCard pokemon={pokemon} key={pokemon.id} id={pokemon.id} />;
   });
 
-  return <div className={styles.pokemon_cards}>{pokemonCard}</div>;
+  return (
+    <div className={styles.pokemon_cards}>
+      {loading ? <Loader /> : singlePokemonCard}
+    </div>
+  );
 };
 
 export default PokemonCards;

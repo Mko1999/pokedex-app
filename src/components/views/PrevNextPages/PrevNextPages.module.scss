@@ -4,8 +4,6 @@
 
 .prev_next_pages {
   @include flexSpaceBetween(row);
-  // display: grid;
-  // grid-template-columns: 1fr 1fr 1fr;
   @include breakpoint(tablet){
     @include flexStart(column);
   }

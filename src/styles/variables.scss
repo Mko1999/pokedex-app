@@ -2,13 +2,21 @@ $redColor: #ff6f61;
 $blackColor: #1a0200;
 $whiteColor: #fffafa;
 $blueColor: #001f3f;
+$borderRadius: 8px;
 $redDarkColor: #C06C84;
+$coffeeColor: #704241;
 $greyColor: #c0c0c0;
 $yellowColor: #FFFFCC;
+$dropdownColor: #fbe5dc;
+$darkGreenColor: #3e3e03;
 $orangeColor: #ffa600e5;
-$borderRadius: 8px;
+$pinkColor: #fdd4c4;
+$pokBackgroundColor: rgb(234, 236, 229);
+$preserve3DColor: linear-gradient(45deg, rgb(68, 26, 26), rgb(192, 167, 167));
 $errorPageColor: linear-gradient(-100deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%);
 $boxShadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+$headerBoxShadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 $gridTemplateColumns: minmax(0, 300px) 100px minmax(0, 300px) 100px minmax(
     0,
     300px

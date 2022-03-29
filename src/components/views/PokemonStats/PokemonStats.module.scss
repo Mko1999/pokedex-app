@@ -4,10 +4,12 @@
 .pokemon_stats {
   display: flex;
   flex-direction: column;
+
   &__title {
     color: $redColor;
     font-size: 22px;
   }
+  
   &__container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
