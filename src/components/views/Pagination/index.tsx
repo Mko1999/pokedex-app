@@ -1,54 +1,60 @@
-import React, { useMemo } from "react";
+import React from "react";
+import classnames from "classnames";
+import { nanoid } from "nanoid";
 import { motion } from "framer-motion";
-import classNames from "classnames";
+import { useDispatch, useSelector } from "react-redux";
 import { CaretLeftFill, CaretRightFill } from "react-bootstrap-icons";
 
 import styles from "./Pagination.module.scss";
+import { usePagination, DOTS } from "../../../hooks";
+
 import { PaginationProps } from "./types";
 
-import { getButtonsArray } from "../../../utils";
-import { Button } from "../../../components/shared";
+import { Button } from "../../shared";
+import { setOffset } from "../../../store/actions";
+import {
+  limitSelector,
+  offsetSelector,
+  pokemonsSelector,
+} from "../../../store/selectors";
 
 const Pagination: React.FC<PaginationProps> = ({
-  limit,
-  offset,
   totalCount,
-  handleNextPage,
-  handlePreviousPage,
-  handlePageChange,
+  siblingCount,
+  pageSize,
 }) => {
-  const countOfPages = Math.ceil(totalCount / limit);
+  const offset = useSelector(offsetSelector);
 
-  const buttonsArray = getButtonsArray(countOfPages, offset);
-  console.log(buttonsArray, "ss");
-
-  const memoizedValue = useMemo(() => {}, [
-    limit,
-    offset,
+  const paginationRange = usePagination({
+    currentPage: offset,
     totalCount,
-    handleNextPage,
-    handlePageChange,
-    handlePreviousPage,
-  ]);
-
-  
-
-  const paginationList = buttonsArray.map((item) => {
-    const buttonClass = classNames(styles.pagination__container__btns__btn, {
-      [styles.pagination__container__btns__btn_active]: offset === item,
-    });
-
-    return (
-      <Button
-        className={buttonClass}
-        onClick={handlePageChange}
-        dataAttribute={item}
-        key={item}
-      >
-        {item}
-      </Button>
-    );
+    siblingCount,
+    pageSize,
   });
+  const lastPage = paginationRange[paginationRange.length - 1];
+  const dispatch = useDispatch();
+
+  // If there are less than 2 times in pagination range we shall not render the component
+  if (paginationRange.length < 2) {
+    return null;
+  }
+
+  const onPrevious = (): void => {
+    if (offset !== 1) {
+      dispatch(setOffset(offset - 1));
+    }
+  };
+
+  const onNext = (): void => {
+    if (offset !== lastPage) {
+      dispatch(setOffset(offset + 1));
+    }
+  };
+
+  const onPageChange = (e: any): void => {
+    const pageNumber = +e.target.dataset.page;
+    dispatch(setOffset(pageNumber));
+  };
 
   return (
     <div className={styles.pagination}>
@@ -56,30 +62,47 @@ const Pagination: React.FC<PaginationProps> = ({
         <ul>
           <motion.li
             whileFocus={{ opacity: "0.7" }}
-            whileTap={{
-              boxShadow: "10px 10px 0 rgba(0, 0, 0, 0.2)",
-              background:
-                "linear-gradient(160deg, #0093E9 0%, #80D0C7 33%, #ffffff 66%, #ffffff 100%)",
-            }}
             transition={{ duration: 2 }}
-            onClick={handlePreviousPage}
             className={styles.pagination__button__back}
+            onClick={onPrevious}
           >
             <Button className={styles.pagination__button__element}>
               <CaretLeftFill size="34" color="#fff" />
             </Button>
           </motion.li>
-          {paginationList}
+          {paginationRange.map((pageNumber: any) => {
+            if (pageNumber === DOTS) {
+              return (
+                <li key={nanoid()} className={styles.pagination__button__dots}>
+                  {DOTS}
+                </li>
+              );
+            }
+            const buttonClassname = classnames(
+              styles.pagination__container__btns__btn,
+              {
+                [styles.pagination__container__btns__btn_active]:
+                  offset === pageNumber,
+              }
+            );
+            // Render our Page Pills
+            return (
+              <li
+                key={nanoid()}
+                className={buttonClassname}
+                onClick={onPageChange}
+                data-page={pageNumber}
+              >
+                {pageNumber}
+              </li>
+            );
+          })}
+
           <motion.li
             whileFocus={{ opacity: "0.7" }}
-            whileTap={{
-              boxShadow: "10px 10px 0 rgba(0, 0, 0, 0.2)",
-              background:
-                "linear-gradient(160deg, #0093E9 0%, #80D0C7 33%, #ffffff 66%, #ffffff 100%)",
-            }}
             transition={{ duration: 2 }}
-            onClick={handleNextPage}
-            className={styles.pagination__button__next}
+            className={styles.pagination__button__back}
+            onClick={onNext}
           >
             <Button className={styles.pagination__button__element}>
               <CaretRightFill size="34" color="#fff" />

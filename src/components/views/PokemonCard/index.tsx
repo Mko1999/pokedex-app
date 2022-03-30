@@ -24,11 +24,13 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, id }) => {
     ? pokemonType.join(" , ")
     : "";
 
+  console.log(pokemon, "pokemon");
+
   return (
     <div className={styles.parent}>
       <div className={styles.child}>
         <div className={styles.pokemon_card}>
-          <Link to={"" || ""}>
+          <Link to={`pokemon/${pokemon?.id}`}>
             <div className={styles.pokemon_card__container}>
               <div className={styles.pokemon_card__container__background}>
                 <div

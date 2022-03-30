@@ -4,24 +4,39 @@ import Input from "../Input";
 import Button from "../Button";
 import { Search } from "react-bootstrap-icons";
 import { getAllPokemonsData } from "../../../data";
+import { INPUT_MAX_LENGTH } from "../../../constants";
+import { useDispatch } from "react-redux";
+import { setOffset, setSearch } from "../../../store/actions";
 
 const SearchBar: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
+  const dispatch = useDispatch();
 
-  const getData = () => {};
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    dispatch(setSearch(searchText));
+    dispatch(setOffset(1));
+  };
+
+  const handleInputChange = (e: any) => {
+    setSearchText(e.target.value);
+  };
+
   return (
-    <div className={styles.searchbar}>
-      <Input
-        maxLength={30}
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        placeholder="Search by name"
-        type="text"
-        className={styles.searchbar__input}
-      />
-      <Button onClick={getData} className={styles.searchbar__button}>
-        <Search size="20" />
-      </Button>
+    <div>
+      <form onSubmit={handleSearch} className={styles.searchbar}>
+        <Input
+          maxLength={INPUT_MAX_LENGTH}
+          value={searchText}
+          onChange={handleInputChange}
+          placeholder="Search by name"
+          type="text"
+          className={styles.searchbar__input}
+        />
+        <Button onClick={handleSearch} className={styles.searchbar__button}>
+          <Search size="20" />
+        </Button>
+      </form>
     </div>
   );
 };

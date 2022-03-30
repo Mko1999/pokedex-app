@@ -21,7 +21,7 @@ const initialState: IPokemonState = {
   typePokemons: [],
   error: "",
   loading: false,
-  offset: 0,
+  offset: 1,
   limit: 10,
   searchValue: "",
   filterType: { value: "All" },

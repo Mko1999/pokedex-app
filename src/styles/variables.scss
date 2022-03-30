@@ -1,4 +1,5 @@
 $redColor: #ff6f61;
+$bodyColor: linear-gradient(-45deg, #ee7752, #eeeeee, #23d5ab);
 $blackColor: #1a0200;
 $whiteColor: #fffafa;
 $blueColor: #001f3f;
@@ -8,6 +9,8 @@ $coffeeColor: #704241;
 $greyColor: #c0c0c0;
 $yellowColor: #FFFFCC;
 $dropdownColor: #fbe5dc;
+$clr-secondary: #4d84c8;
+$clr-wht: #fffcf6;
 $darkGreenColor: #3e3e03;
 $orangeColor: #ffa600e5;
 $pinkColor: #fdd4c4;
@@ -21,3 +24,4 @@ $gridTemplateColumns: minmax(0, 300px) 100px minmax(0, 300px) 100px minmax(
     0,
     300px
   );
+$textShadow: -6px -6px $clr-wht -5px -5px $clr-wht -4px -4px $clr-wht -3px -3px $clr-wht -2px -2px $clr-wht -1px -1px $clr-wht 1px 1px $clr-wht 2px 2px $clr-wht 3px 3px $clr-wht, 4px 4px $clr-wht, 5px 5px $clr-wht;

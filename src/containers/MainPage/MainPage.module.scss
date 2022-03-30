@@ -1,6 +1,7 @@
 @import "../../styles/utils.scss";
 @import "../../styles/variables.scss";
 @import "../../styles//breakpoints.scss";
+@import "../../styles/animations.scss";
 
 .main_page {
   width: 100%;
@@ -30,6 +31,16 @@
     @include flexCenter(column);
     color: $redColor;
     font-size: 48px;
+    text-shadow: $textShadow;
+    animation: moveIn 2s 0s cubic-bezier(.36,0,.06,1) alternate 2 ;
+
+    @include breakpoint(tablet){
+      font-size: 30px;
+    }
+
+    @include breakpoint(tablet-small){
+      font-size: 25px;
+    }
   }
 
   &__header {

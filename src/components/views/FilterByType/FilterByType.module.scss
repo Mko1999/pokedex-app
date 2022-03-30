@@ -11,13 +11,17 @@
   }
 
   &__container {
-    @include flexCenter(row);
+    @include flexSpaceAround(row);
     padding: 8px;
     cursor: pointer;
     color: $yellowColor;
     height: 30px;
     width: 100%;
     border-radius: 8px;
+
+    @include breakpoint(laptop-small){
+      justify-content: center;
+    }
 
     &__active{
       background: $pokBackgroundColor;
@@ -30,12 +34,15 @@
   &__title {
     font-size: 16px;
     color: $redColor;
-    padding-right: 5px;
+
+    @include breakpoint(laptop-small){
+      padding-right: 5px;
+    }
 
     @include breakpoint(tablet){
       color: $darkGreenColor;
       font-size: 20px;
-      padding-right: 8px;
+      
     }
   }
 

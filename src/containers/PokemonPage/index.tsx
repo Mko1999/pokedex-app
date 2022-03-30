@@ -7,7 +7,7 @@ import {
 } from "../../components/views";
 import { Link, useParams } from "react-router-dom";
 
-const PokemonPage = () => {
+const PokemonPage: React.FC = () => {
   const { id } = useParams();
 
   return (
