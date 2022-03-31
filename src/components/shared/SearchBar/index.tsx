@@ -33,7 +33,7 @@ const SearchBar: React.FC = () => {
           type="text"
           className={styles.searchbar__input}
         />
-        <Button onClick={handleSearch} className={styles.searchbar__button}>
+        <Button className={styles.searchbar__button}>
           <Search size="20" />
         </Button>
       </form>

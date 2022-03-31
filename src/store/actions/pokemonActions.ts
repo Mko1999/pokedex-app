@@ -2,7 +2,7 @@ import { SORT_BY_CHANGE } from "./../reducers/pokemonReducer";
 import { Dispatch } from "redux";
 import { getAllPokemonsData } from "../../data";
 import { getPokemonUrls } from "../../data/data";
-import { NameURL } from "../../types";
+import { NameURL, Pokemon } from "../../types";
 import {
   FETCH_POKEMONS_ERROR,
   FETCH_POKEMONS_SUCCESS,
@@ -48,7 +48,7 @@ const fetchPokemonError = (payload: string) => {
   };
 };
 
-const fetchPokemonSuccess = (payload: any[]) => {
+const fetchPokemonSuccess = (payload: Pokemon[]) => {
   return {
     type: FETCH_POKEMON_SUCCESS,
     payload,

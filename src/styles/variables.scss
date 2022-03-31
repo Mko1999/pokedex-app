@@ -1,3 +1,10 @@
+$clr-bg: #272324;
+$clr1: #bbbb88;
+$clr2: #ccc68d;
+$clr3: #eedd99;
+$clr4: #eec290;
+$clr5: #eeaa88;
+$size: 75px;
 $redColor: #ff6f61;
 $bodyColor: linear-gradient(-45deg, #ee7752, #eeeeee, #23d5ab);
 $blackColor: #1a0200;
@@ -20,16 +27,19 @@ $preserve3DColor: linear-gradient(45deg, rgb(68, 26, 26), rgb(192, 167, 167));
 $errorPageColor: linear-gradient(-100deg, #fa7c30 30%, rgba(0, 0, 0, 0) 30%);
 $boxShadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 $headerBoxShadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
-rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-$gridTemplateColumns: minmax(0, 300px) 100px minmax(0, 300px) 100px minmax(
-    0,
-    300px
-  );
-$textShadow: -6px -6px $clr-wht -5px -5px $clr-wht -4px -4px $clr-wht -3px -3px $clr-wht -2px -2px $clr-wht -1px -1px $clr-wht 1px 1px $clr-wht 2px 2px $clr-wht 3px 3px $clr-wht, 4px 4px $clr-wht, 5px 5px $clr-wht;
-$size: 75px;
-  $clr-bg: #272324;
-  $clr1: #bbbb88;
-  $clr2: #ccc68d;
-  $clr3: #eedd99;
-  $clr4: #eec290;
-  $clr5: #eeaa88;
+rgba(17, 17, 26, 0.1) 0px 8px 24px,
+ rgba(17, 17, 26, 0.1) 0px 16px 56px;
+$gridTemplateColumns: minmax(0, 300px) 
+100px
+ minmax(0, 300px)
+100px 
+minmax(0,300px);
+
+$textShadow: -6px -6px $clr-wht 
+-5px -5px $clr-wht
+ -4px -4px $clr-wht 
+ -3px -3px $clr-wht -2px -2px 
+ $clr-wht -1px -1px $clr-wht 
+ 1px 1px $clr-wht 2px 2px
+$clr-wht 3px 3px $clr-wht, 4px 4px $clr-wht, 5px 5px $clr-wht;
+

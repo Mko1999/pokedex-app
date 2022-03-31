@@ -12,21 +12,48 @@ import {
 import { getPokemonData } from "../../data";
 import { PokemonLoader } from "../../components/shared";
 import { getPokemonInfo } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { pokemonsSelector } from "../../store/selectors";
+import { getAllPokemonsData, getPokemonUrls } from "../../data/data";
+import { fetchPokemons } from "../../store/actions";
 
 const PokemonPage: React.FC = () => {
-  const { id } = useParams();
+  const allPokemons = useSelector(pokemonsSelector);
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!allPokemons.length) {
+      dispatch(fetchPokemons());
+    }
+  }, [allPokemons]);
+  const { name } = useParams();
   const [pokemon, setPokemon] = useState<any>(null);
+  const [prevPokemon, setPrevPokemon] = useState<any>(null);
+  const [nextPokemon, setNextPokemon] = useState<any>(null);
 
   useEffect(() => {
     const pokemonGetter: () => void = async () => {
-      const data = await getPokemonData(Number(id));
-      setPokemon(data);
+      const index = allPokemons.findIndex(
+        (pokemon) =>
+          pokemon.name.toLowerCase() === name?.replace("-", " ").toLowerCase()
+      );
+      console.log(index, "55");
+
+      if (index > -1) {
+        const data = await getPokemonUrls(allPokemons[index].url);
+        setPokemon(data);
+        if (index > 0) {
+          setPrevPokemon(allPokemons[index - 1]?.name);
+        }
+        if (index < allPokemons.length) {
+          setNextPokemon(allPokemons[index + 1]?.name);
+        }
+      }
     };
-    if (id) {
+    if (name) {
       pokemonGetter();
     }
-  }, [id]);
+  }, [name, allPokemons]);
 
   const pokemonInfo = getPokemonInfo(pokemon).map((item) => {
     return (
@@ -46,9 +73,6 @@ const PokemonPage: React.FC = () => {
 
   const pokemonPic = pokemon?.sprites.back_default;
 
-  const prevName = "";
-  const nextName = "";
-
   return (
     <>
       {pokemon ? (
@@ -56,8 +80,8 @@ const PokemonPage: React.FC = () => {
           <div className={styles.pokemon_page__container}>
             <PrevNextPages
               name={pokemon?.name}
-              prevName={prevName}
-              nextName={nextName}
+              prevName={prevPokemon}
+              nextName={nextPokemon}
             />
             <div className={styles.pokemon_page__goback}>
               <p>

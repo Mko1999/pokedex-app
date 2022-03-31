@@ -17,6 +17,7 @@ import {
   loadingSelector,
   offsetSelector,
   pokemonsSelector,
+  searchValueSelector,
   sortBySelector,
 } from "../../store/selectors";
 import { NameURL } from "../../types";
@@ -35,6 +36,7 @@ const MainPage: React.FC = () => {
   const limit = useSelector(limitSelector);
   const sortBy = useSelector(sortBySelector);
   const loading = useSelector(loadingSelector);
+  const search = useSelector(searchValueSelector);
 
   useEffect(() => {
     dispatch(fetchPokemons());
@@ -43,22 +45,25 @@ const MainPage: React.FC = () => {
   const getUrls = (allPokemons: NameURL[]) => {
     const index = (offset - 1) * limit;
     const end = offset * limit;
+    const filteredPokemons = allPokemons.filter((value) =>
+      value.name.includes(search)
+    );
 
     switch (sortBy) {
       case LOWEST_TO_HIGHEST_NUMBER:
-        return allPokemons.slice(index, end).map((item) => item.url);
+        return filteredPokemons.slice(index, end).map((item) => item.url);
       case HIGHEST_TO_LOWEST_NUMBER:
-        return allPokemons
+        return filteredPokemons
           .slice(-end, index === 0 ? undefined : -index)
           .reverse()
           .map((item) => item.url);
       case A_Z:
-        return allPokemons
+        return filteredPokemons
           .sort((a, b) => a.name.localeCompare(b.name))
           .slice(index, offset * limit)
           .map((item: NameURL) => item.url);
       case Z_A:
-        return allPokemons
+        return filteredPokemons
           .sort((a, b) => b.name.localeCompare(a.name))
           .slice(index, offset * limit)
           .map((item: NameURL) => item.url);
@@ -70,7 +75,7 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     const urls = getUrls(allPokemons);
     dispatch(fetchPokemon(urls));
-  }, [dispatch, offset, limit, sortBy, allPokemons]);
+  }, [dispatch, offset, limit, sortBy, allPokemons, search]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

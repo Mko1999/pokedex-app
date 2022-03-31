@@ -12,19 +12,17 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
   prevName,
   nextName,
 }) => {
-  const { id } = useParams();
-
   const iconClassname = classNames(
     styles.prev_next_pages__arrow,
     styles.prev_next_pages__left
   );
 
   const previousLinkClassName = classNames(styles.prev_next_pages__link, {
-    [styles.prev_next_pages__link__disabled]: id === "1",
+    [styles.prev_next_pages__link__disabled]: name === "1",
   });
 
   const nextLinkClassName = classNames(styles.prev_next_pages__link, {
-    [styles.prev_next_pages__link__disabled]: id === "10228",
+    [styles.prev_next_pages__link__disabled]: name === "10228",
   });
 
   return (
@@ -32,10 +30,7 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
       <div className={styles.prev_next_pages__back}>
         <img alt="arrow" className={iconClassname} src={Arrow} />
         <p>
-          <Link
-            className={previousLinkClassName}
-            to={`/pokemon/${Number(id) - 1}`}
-          >
+          <Link className={previousLinkClassName} to={`/pokemon/${prevName}`}>
             {prevName}
           </Link>
         </p>
@@ -45,7 +40,7 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
       </div>
       <div className={styles.prev_next_pages__next}>
         <p className={styles.prev_next_pages__next__text}>
-          <Link className={nextLinkClassName} to={`/pokemon/${Number(id) + 1}`}>
+          <Link className={nextLinkClassName} to={`/pokemon/${nextName}`}>
             {nextName}
           </Link>
         </p>

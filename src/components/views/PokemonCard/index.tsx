@@ -33,7 +33,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, id }) => {
       ) : (
         <div className={styles.child}>
           <div className={styles.pokemon_card}>
-            <Link to={`pokemon/${pokemon.id}`}>
+            <Link to={`pokemon/${pokemon.name.replace(" ", "-")}`}>
               <div className={styles.pokemon_card__container}>
                 <div className={styles.pokemon_card__container__background}>
                   <div
