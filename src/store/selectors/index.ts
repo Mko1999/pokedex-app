@@ -4,6 +4,7 @@ export {
   typePokemonSelector,
   errorSelector,
   loadingSelector,
+  pokemonLoadingSelector,
   offsetSelector,
   limitSelector,
   searchValueSelector,

@@ -1,9 +1,20 @@
 @import "../../../styles/utils.scss";
 @import "../../../styles/variables.scss";
+@import "../../../styles/breakpoints.scss";
 
 .pokemon_evolutions {
   display: flex;
   flex-direction: column;
+  margin-left: 15px;
+
+  @include breakpoint(tablet){
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 90%;
+    margin: 0 auto;
+
+  }
   &__title {
     font-size: 25px;
     color: $redColor;

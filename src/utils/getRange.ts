@@ -3,5 +3,3 @@ export const getRange = (start: number, end: number): number[] => {
 
   return Array.from({ length }, (_, index) => index + start);
 };
-
-console.log(getRange(3, 6), "44");

@@ -55,3 +55,10 @@
     filter: blur(0px);
     }
   }
+
+  @keyframes spinner2 {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+

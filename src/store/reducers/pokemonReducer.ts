@@ -21,6 +21,7 @@ const initialState: IPokemonState = {
   typePokemons: [],
   error: "",
   loading: false,
+  pokemonLoading: false,
   offset: 1,
   limit: 10,
   searchValue: "",
@@ -69,7 +70,7 @@ const pokemonReducer = (
     case FETCH_POKEMON_REQUEST: {
       return {
         ...state,
-        loading: true,
+        pokemonLoading: true,
         pokemons: [],
         error: "",
       };
@@ -79,7 +80,7 @@ const pokemonReducer = (
       return {
         ...state,
         error: ERROR_MESSAGE || payload,
-        loading: false,
+        pokemonLoading: false,
         pokemons: [],
       };
     }
@@ -88,7 +89,7 @@ const pokemonReducer = (
       return {
         ...state,
         pokemons: payload,
-        loading: false,
+        pokemonLoading: false,
         error: "",
       };
     }

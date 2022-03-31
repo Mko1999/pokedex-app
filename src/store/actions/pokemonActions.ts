@@ -59,7 +59,6 @@ export const fetchPokemons = () => async (dispatch: any) => {
   dispatch(fetchPokemonsRequest());
   try {
     const data = await getAllPokemonsData();
-    await new Promise((res) => setTimeout(res, 1000));
     dispatch(fetchPokemonsSuccess(data));
   } catch (e) {
     if (e instanceof Error) dispatch(fetchPokemonsError(e.message));

@@ -1,11 +1,12 @@
-import { NameURL } from "../../types";
+import { NameURL, Pokemon } from "../../types";
 
 export interface IPokemonState {
   allPokemons: NameURL[];
-  pokemons: any[];
+  pokemons: Pokemon[];
   typePokemons: any[];
   error: string;
   loading: boolean;
+  pokemonLoading: boolean;
   offset: number;
   limit: number;
   searchValue: string;

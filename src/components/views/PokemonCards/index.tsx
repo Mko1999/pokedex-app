@@ -2,15 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { PokemonCard } from "..";
 import { loadingSelector, pokemonSelector } from "../../../store/selectors";
+import { Pokemon } from "../../../types";
 import { Loader } from "../../shared";
 import styles from "./PokemonCards.module.scss";
 
 const PokemonCards: React.FC = () => {
   const pokemons = useSelector(pokemonSelector);
-  console.log(pokemons, "a");
   const loading = useSelector(loadingSelector);
 
-  const singlePokemonCard = pokemons.map((pokemon: any) => {
+  const singlePokemonCard = pokemons.map((pokemon: Pokemon) => {
     return <PokemonCard pokemon={pokemon} key={pokemon.id} id={pokemon.id} />;
   });
 

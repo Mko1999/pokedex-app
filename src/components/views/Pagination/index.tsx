@@ -12,11 +12,7 @@ import { PaginationProps } from "./types";
 
 import { Button } from "../../shared";
 import { setOffset } from "../../../store/actions";
-import {
-  limitSelector,
-  offsetSelector,
-  pokemonsSelector,
-} from "../../../store/selectors";
+import { offsetSelector } from "../../../store/selectors";
 
 const Pagination: React.FC<PaginationProps> = ({
   totalCount,
@@ -31,11 +27,12 @@ const Pagination: React.FC<PaginationProps> = ({
     siblingCount,
     pageSize,
   });
-  const lastPage = paginationRange[paginationRange.length - 1];
+  const lastPage =
+    paginationRange && paginationRange[paginationRange.length - 1];
   const dispatch = useDispatch();
 
   // If there are less than 2 times in pagination range we shall not render the component
-  if (paginationRange.length < 2) {
+  if (paginationRange && paginationRange.length < 2) {
     return null;
   }
 
@@ -70,33 +67,37 @@ const Pagination: React.FC<PaginationProps> = ({
               <CaretLeftFill size="34" color="#fff" />
             </Button>
           </motion.li>
-          {paginationRange.map((pageNumber: any) => {
-            if (pageNumber === DOTS) {
+          {paginationRange &&
+            paginationRange.map((pageNumber: any) => {
+              if (pageNumber === DOTS) {
+                return (
+                  <li
+                    key={nanoid()}
+                    className={styles.pagination__button__dots}
+                  >
+                    {DOTS}
+                  </li>
+                );
+              }
+              const buttonClassname = classnames(
+                styles.pagination__container__btns__btn,
+                {
+                  [styles.pagination__container__btns__btn_active]:
+                    offset === pageNumber,
+                }
+              );
+              // Render our Page Pills
               return (
-                <li key={nanoid()} className={styles.pagination__button__dots}>
-                  {DOTS}
+                <li
+                  key={nanoid()}
+                  className={buttonClassname}
+                  onClick={onPageChange}
+                  data-page={pageNumber}
+                >
+                  {pageNumber}
                 </li>
               );
-            }
-            const buttonClassname = classnames(
-              styles.pagination__container__btns__btn,
-              {
-                [styles.pagination__container__btns__btn_active]:
-                  offset === pageNumber,
-              }
-            );
-            // Render our Page Pills
-            return (
-              <li
-                key={nanoid()}
-                className={buttonClassname}
-                onClick={onPageChange}
-                data-page={pageNumber}
-              >
-                {pageNumber}
-              </li>
-            );
-          })}
+            })}
 
           <motion.li
             whileFocus={{ opacity: "0.7" }}

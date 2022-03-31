@@ -8,7 +8,7 @@ export const usePagination = ({
   pageSize,
   siblingCount = 1,
   currentPage,
-}: IPagination): any => {
+}: IPagination): (string | number)[] | undefined => {
   const totalPageCount = Math.ceil(totalCount / pageSize);
 
   // Pages count is determined as siblingCount + firstPage + lastPage + currentPage + 2*DOTS

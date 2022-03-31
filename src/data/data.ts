@@ -7,8 +7,8 @@ export const getAllPokemonsData = async (): Promise<NameURL[]> => {
   return data.results;
 };
 
-export const getPokemonData = async (name: string) => {
-  const { data } = await api.get(`pokemon/${name}`);
+export const getPokemonData = async (id: number) => {
+  const { data } = await api.get(`pokemon/${id}`);
   return data;
 };
 

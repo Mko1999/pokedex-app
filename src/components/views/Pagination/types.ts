@@ -8,9 +8,6 @@
 // };
 
 export type PaginationProps = {
-  // onPageChange: any;
-  // onNext: any;
-  // onPrevious: any;
   totalCount: number;
   siblingCount: number;
   pageSize: number;

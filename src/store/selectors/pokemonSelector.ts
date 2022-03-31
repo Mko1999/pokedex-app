@@ -11,6 +11,9 @@ export const errorSelector = (state: any) => state.pokemon.error;
 
 export const loadingSelector = (state: any) => state.pokemon.loading;
 
+export const pokemonLoadingSelector = (state: any) =>
+  state.pokemon.pokemonLoading;
+
 export const offsetSelector = (state: any) => state.pokemon.offset;
 
 export const limitSelector = (state: any) => state.pokemon.limit;

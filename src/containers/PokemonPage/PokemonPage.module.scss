@@ -38,3 +38,29 @@
     }
   }
 }
+
+.pokemon_info__mainInfo__advanced__item{
+  @include flexCenter(column);
+  align-items: flex-start;
+}
+
+.pokemon_info__mainInfo__advanced__text{
+  font-size: 20px;
+  text-align: center;
+  padding: 4px;
+  border-radius: 10px;
+  border-bottom: 2px solid $redColor;
+}
+
+.pokemon_info__mainInfo__advanced__title{
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 500;
+  color: $redColor;
+  background: $activeBlackColor;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+
+

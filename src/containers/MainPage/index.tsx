@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import styles from "./MainPage.module.scss";
+
 import { Loader, SearchBar } from "../../components/shared";
 import {
   FilterByType,
@@ -9,7 +11,7 @@ import {
   Pagination,
   PokemonCards,
 } from "../../components/views";
-import { fetchPokemon, fetchPokemons, setOffset } from "../../store/actions";
+import { fetchPokemon, fetchPokemons } from "../../store/actions";
 import {
   limitSelector,
   loadingSelector,
@@ -25,8 +27,6 @@ import {
   Z_A,
 } from "../../utils/sortOptions";
 
-import styles from "./MainPage.module.scss";
-
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ const MainPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchPokemons());
-  }, [dispatch]);
+  }, [dispatch, sortBy]);
 
   const getUrls = (allPokemons: NameURL[]) => {
     const index = (offset - 1) * limit;

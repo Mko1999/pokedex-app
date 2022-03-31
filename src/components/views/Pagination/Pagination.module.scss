@@ -33,11 +33,11 @@
         width: 40px;
         height: 40px;
         background: $orangeColor;
-        border: none;
+        border:none;
         outline: none;
         cursor: pointer;
         margin: 0 5px ;
-        border-radius: 10px;
+        border-radius: 50%;
         color: $whiteColor;
         @include flexCenter(row);
 
@@ -46,7 +46,7 @@
         }
 
         &_active{
-          background-color: pink;
+          background-color: $activeBlackColor;
         }
       }
     }
@@ -62,7 +62,7 @@
       outline: none;
       cursor: pointer;
       margin: 0 5px ;
-      border-radius: 10px;
+      border-radius: 50%;
       color: $whiteColor;
       @include flexCenter(row);
     }
@@ -84,5 +84,6 @@
   
   li {
     list-style-type: none;
+    border-radius: 50%;
   }
 }

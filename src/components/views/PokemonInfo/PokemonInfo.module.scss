@@ -1,12 +1,21 @@
 @import "../../../styles/variables.scss";
 @import "../../../styles/utils.scss";
+@import "../../../styles/breakpoints.scss";
 .pokemon_info {
   display: grid;
   grid-template-columns: 2fr 3fr;
 
+  @include breakpoint(tablet){
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    width: 90%;
+    margin: 0 auto;
+  }
+
   &__image {
     @include flexCenter(row);
     padding: 15px;
+    margin-right: 15px;
 
     &__container {
       width: 100%;
@@ -38,13 +47,14 @@
       
       &__item {
         @include flexCenter(column);
+        align-items: flex-start;
       }
       
       &__text {
         font-size: 20px;
         color: $redColor;
         text-align: center;
-        background: #55bf7647;
+        background: $activeBlackColor;
         padding: 12px;
       }
     }

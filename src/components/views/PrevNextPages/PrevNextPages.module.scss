@@ -34,6 +34,7 @@
   &__title {
     font-size: 50px ;
     color: $redColor;
+    text-transform: capitalize;
 
     @include breakpoint(laptop-small){
       font-size: 30px;
@@ -48,5 +49,13 @@
   }
   &__left {
     transform: rotate(180deg);
+  }
+
+  &__link{
+
+    &__disabled{
+      pointer-events: none;
+    
+    }
   }
 }
