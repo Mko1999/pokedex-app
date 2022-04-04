@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./MainPage.module.scss";
 
-import { Loader, SearchBar } from "../../components/shared";
+import { SearchBar } from "../../components/shared";
 import {
   FilterByType,
   SortPokemons,
@@ -16,6 +16,7 @@ import {
   limitSelector,
   loadingSelector,
   offsetSelector,
+  pokemonsByTypeSelector,
   pokemonsSelector,
   searchValueSelector,
   sortBySelector,
@@ -27,6 +28,7 @@ import {
   LOWEST_TO_HIGHEST_NUMBER,
   Z_A,
 } from "../../utils/sortOptions";
+import { fetchPokemonTypes } from "../../store/actions/pokemonActions";
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,17 +37,19 @@ const MainPage: React.FC = () => {
   const offset = useSelector(offsetSelector);
   const limit = useSelector(limitSelector);
   const sortBy = useSelector(sortBySelector);
-  const loading = useSelector(loadingSelector);
   const search = useSelector(searchValueSelector);
+  const pokemonsByType = useSelector(pokemonsByTypeSelector);
 
   useEffect(() => {
     dispatch(fetchPokemons());
-  }, [dispatch, sortBy]);
+    dispatch(fetchPokemonTypes());
+  }, [dispatch]);
 
-  const getUrls = (allPokemons: NameURL[]) => {
+  const getUrls = () => {
+    const pokemons = pokemonsByType.length ? pokemonsByType : allPokemons;
     const index = (offset - 1) * limit;
     const end = offset * limit;
-    const filteredPokemons = allPokemons.filter((value) =>
+    const filteredPokemons = pokemons.filter((value) =>
       value.name.includes(search)
     );
 
@@ -73,9 +77,9 @@ const MainPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const urls = getUrls(allPokemons);
+    const urls = getUrls();
     dispatch(fetchPokemon(urls));
-  }, [dispatch, offset, limit, sortBy, allPokemons, search]);
+  }, [dispatch, offset, limit, sortBy, allPokemons, search, pokemonsByType]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -93,7 +97,7 @@ const MainPage: React.FC = () => {
           <SortPokemons />
           <ShowPerPage />
         </div>
-        {loading ? <Loader /> : <PokemonCards />}
+        <PokemonCards />
 
         <Pagination
           totalCount={allPokemons.length}

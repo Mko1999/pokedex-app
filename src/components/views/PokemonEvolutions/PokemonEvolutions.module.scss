@@ -3,17 +3,16 @@
 @import "../../../styles/breakpoints.scss";
 
 .pokemon_evolutions {
-  display: flex;
-  flex-direction: column;
-  margin-left: 15px;
+  
+  @include flexCenter(column);
+  padding-top: 40px;
 
   @include breakpoint(tablet){
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     width: 90%;
-    margin: 0 auto;
-
+    place-items: center;
   }
   &__title {
     font-size: 25px;
@@ -22,6 +21,7 @@
   &__container {
     display: grid;
     grid-template-columns: $gridTemplateColumns;
+
 
     &__arrow {
       @include flexCenter(row);

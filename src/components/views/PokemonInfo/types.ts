@@ -1,4 +1,6 @@
 export type PokemonInfoProps = {
-  pokemonInfo: any;
-  pokemonPic: any;
+  pokemonInfo: object;
+  pokemonPic: string | undefined;
+  flavorText: string;
+  id: number | undefined;
 };

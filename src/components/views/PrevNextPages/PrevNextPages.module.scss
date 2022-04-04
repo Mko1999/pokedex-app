@@ -4,10 +4,7 @@
 
 .prev_next_pages {
   @include flexSpaceBetween(row);
-  @include breakpoint(tablet){
-    @include flexStart(column);
-  }
-
+  
   &__back {
     @include flexCenter(row);
 
@@ -16,6 +13,10 @@
         text-decoration: none;
         color: $redColor;
         font-size: 20px;
+
+        @include breakpoint(phone){
+          font-size: 13px
+        }
       }
     }
   }
@@ -27,7 +28,12 @@
       a {
         text-decoration: none;
         color: $redColor;
-        font-size: 20px;
+        font-size: 22px;
+        text-transform: capitalize;
+        font-weight: 500;
+        @include breakpoint(phone){
+          font-size: 13px;
+        }
       }
     }
   }
@@ -35,6 +41,7 @@
     font-size: 50px ;
     color: $redColor;
     text-transform: capitalize;
+    margin: 25px 0 !important;
 
     @include breakpoint(laptop-small){
       font-size: 30px;
@@ -46,6 +53,7 @@
   }
   &__arrow {
     margin-left: 5px;
+    cursor: pointer;
   }
   &__left {
     transform: rotate(180deg);

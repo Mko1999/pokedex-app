@@ -107,8 +107,10 @@ export type Stats = {
 
 export type Types = {
   slot: number;
-  type: {
-    name: string;
-    url: string;
-  };
+  type: NameURL;
+};
+
+export type Slots = {
+  slot: number;
+  pokemon: NameURL;
 };

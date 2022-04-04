@@ -1,7 +1,8 @@
 export {
   pokemonsSelector,
   pokemonSelector,
-  typePokemonSelector,
+  pokemonTypesSelector,
+  pokemonsByTypeSelector,
   errorSelector,
   loadingSelector,
   pokemonLoadingSelector,

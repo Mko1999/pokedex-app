@@ -33,6 +33,7 @@
     font-size: 48px;
     text-shadow: $textShadow;
     animation: moveIn 2s 0s cubic-bezier(.36,0,.06,1) alternate 2 ;
+    margin: 25px 0 !important;
 
     @include breakpoint(tablet){
       font-size: 30px;

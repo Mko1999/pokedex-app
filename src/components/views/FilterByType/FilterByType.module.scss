@@ -72,19 +72,18 @@
       grid-template-columns: 1fr 1fr;
     }
 
-    &:hover {
-      background: $blueColor;
-    }
-    
-    &:hover &__element {
-      color: #ffcccc;
-    }
-
     &__element {
       list-style-type: none;
       padding: 15px;
       color: $blueColor;
       font-size: 18px;
+      text-transform: capitalize;
+
+      &:hover{
+        // fix border radius for first child and last child
+        background: $redColor;
+        border-radius: 6px;
+      }
     }
   }
 }

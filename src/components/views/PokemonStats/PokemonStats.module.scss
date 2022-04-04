@@ -1,18 +1,48 @@
 @import "../../../styles/variables.scss";
 @import "../../../styles/utils.scss";
+@import "../../../styles/breakpoints.scss";
 
 .pokemon_stats {
-  display: flex;
-  flex-direction: column;
+  @include flexCenter(column);
 
   &__title {
     color: $redColor;
     font-size: 22px;
+    width: 90%;
+    text-align: center;
   }
   
   &__container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     gap: 15px 20px;
+    width: 90%;
+    place-items: center;
+
+    // @include breakpoint(laptop-small){
+    //   grid-template-columns: 1fr 1fr 1fr;
+    // }
+
+    &__title{
+      text-transform: capitalize;
+      color: $activeBlackColor;
+      font-size: 20px;
+      text-align: center;
+      font-family: cursive;
+      font-weight: 500;
+
+      @include breakpoint(tablet){
+        font-size: 15px;
+      }
+
+    }
+
+    &__item{
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(0,1fr));
+      width: 90%;
+      gap: 15px 20px;
+      place-items: center;
+    }
   }
 }

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import classNames from "classnames";
 
 import { PrevNextProps } from "./types";
+import { FIRST_POKEMON_NAME, LAST_POKEMON_NAME } from "../../../constants";
 
 import styles from "./PrevNextPages.module.scss";
 import Arrow from "../../../assets/arrow.svg";
@@ -18,20 +19,23 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
   );
 
   const previousLinkClassName = classNames(styles.prev_next_pages__link, {
-    [styles.prev_next_pages__link__disabled]: name === "1",
+    [styles.prev_next_pages__link__disabled]: name === FIRST_POKEMON_NAME,
   });
 
   const nextLinkClassName = classNames(styles.prev_next_pages__link, {
-    [styles.prev_next_pages__link__disabled]: name === "10228",
+    [styles.prev_next_pages__link__disabled]: name === LAST_POKEMON_NAME,
   });
+
+  const realPrevName = name === FIRST_POKEMON_NAME ? "" : prevName;
+  const realNextName = name === LAST_POKEMON_NAME ? "" : nextName;
 
   return (
     <div className={styles.prev_next_pages}>
       <div className={styles.prev_next_pages__back}>
         <img alt="arrow" className={iconClassname} src={Arrow} />
-        <p>
+        <p className={styles.prev_next_pages__next__text}>
           <Link className={previousLinkClassName} to={`/pokemon/${prevName}`}>
-            {prevName}
+            {realPrevName}
           </Link>
         </p>
       </div>
@@ -41,7 +45,7 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
       <div className={styles.prev_next_pages__next}>
         <p className={styles.prev_next_pages__next__text}>
           <Link className={nextLinkClassName} to={`/pokemon/${nextName}`}>
-            {nextName}
+            {realNextName}
           </Link>
         </p>
         <img

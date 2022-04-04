@@ -3,7 +3,6 @@ import styles from "./SearchBar.module.scss";
 import Input from "../Input";
 import Button from "../Button";
 import { Search } from "react-bootstrap-icons";
-import { getAllPokemonsData } from "../../../data";
 import { INPUT_MAX_LENGTH } from "../../../constants";
 import { useDispatch } from "react-redux";
 import { setOffset, setSearch } from "../../../store/actions";
@@ -16,6 +15,7 @@ const SearchBar: React.FC = () => {
     e.preventDefault();
     dispatch(setSearch(searchText));
     dispatch(setOffset(1));
+    setSearchText("");
   };
 
   const handleInputChange = (e: any) => {
