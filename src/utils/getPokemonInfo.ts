@@ -1,10 +1,23 @@
 import { Pokemon, Types } from "../types";
 import redArrow from "../assets/redArrow.png";
+import { meterToFeet, kgToPound } from ".";
 
 export const getPokemonInfo = (pokemon: Pokemon) => {
   return [
-    { title: "Height", image: redArrow, info: pokemon?.height },
-    { title: "Weight", image: redArrow, info: pokemon?.weight },
+    {
+      title: "Height",
+      image: redArrow,
+      info: `${pokemon?.height / 10} m (${meterToFeet(
+        pokemon?.height / 10
+      )}ft)`,
+    },
+    {
+      title: "Weight",
+      image: redArrow,
+      info: `${pokemon?.weight / 10}kg (${kgToPound(
+        pokemon?.weight / 10
+      )}pound) `,
+    },
     {
       title: "Base experience",
       image: redArrow,

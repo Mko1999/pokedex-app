@@ -7,5 +7,5 @@ export const meterToFeet = (num: number): number | string => {
 };
 
 export const kgToPound = (num: number): number => {
-  return Math.round(num * 2.205 * 10) / 10;
+  return Math.round((num / 2.205) * 10) / 10;
 };

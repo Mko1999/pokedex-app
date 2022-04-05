@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import errorPic from "../../assets/error.png";
-
 import styles from "./ErrorPage.module.scss";
+
+import errorPic from "../../assets/error.png";
 
 const ErrorPage: React.FC = () => (
   <div className={styles.error_page}>

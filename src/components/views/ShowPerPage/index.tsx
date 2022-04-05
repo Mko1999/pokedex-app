@@ -62,7 +62,7 @@ const ShowPerPage: React.FC = () => {
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const clickOutsidehandler = () => {
+  const clickOutsidehandler = (): void => {
     setVisible(false);
   };
 

@@ -19,10 +19,6 @@
     width: 90%;
     place-items: center;
 
-    // @include breakpoint(laptop-small){
-    //   grid-template-columns: 1fr 1fr 1fr;
-    // }
-
     &__title{
       text-transform: capitalize;
       color: $activeBlackColor;
@@ -34,7 +30,6 @@
       @include breakpoint(tablet){
         font-size: 15px;
       }
-
     }
 
     &__item{

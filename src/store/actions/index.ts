@@ -3,6 +3,13 @@ export {
   setLimit,
   setSearch,
   setSortBy,
-  fetchPokemons,
   fetchPokemon,
+  fetchPokemons,
 } from "./pokemonActions";
+
+export {
+  setFilter,
+  resetFilter,
+  fetchPokemonTypes,
+  fetchPokemonsByType,
+} from "./pokemonTypeActions";

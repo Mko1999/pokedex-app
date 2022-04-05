@@ -11,10 +11,14 @@ import {
   Pagination,
   PokemonCards,
 } from "../../components/views";
-import { fetchPokemon, fetchPokemons } from "../../store/actions";
 import {
+  fetchPokemon,
+  fetchPokemons,
+  fetchPokemonTypes,
+} from "../../store/actions";
+import {
+  filterTypeSelector,
   limitSelector,
-  loadingSelector,
   offsetSelector,
   pokemonsByTypeSelector,
   pokemonsSelector,
@@ -28,7 +32,7 @@ import {
   LOWEST_TO_HIGHEST_NUMBER,
   Z_A,
 } from "../../utils/sortOptions";
-import { fetchPokemonTypes } from "../../store/actions/pokemonActions";
+import { ALL_TYPES } from "../../constants";
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -39,17 +43,19 @@ const MainPage: React.FC = () => {
   const sortBy = useSelector(sortBySelector);
   const search = useSelector(searchValueSelector);
   const pokemonsByType = useSelector(pokemonsByTypeSelector);
+  const filter = useSelector(filterTypeSelector);
 
   useEffect(() => {
     dispatch(fetchPokemons());
     dispatch(fetchPokemonTypes());
   }, [dispatch]);
 
-  const getUrls = () => {
-    const pokemons = pokemonsByType.length ? pokemonsByType : allPokemons;
+  const pokemonsToRender = filter !== ALL_TYPES ? pokemonsByType : allPokemons;
+
+  const getUrls = (): string[] => {
     const index = (offset - 1) * limit;
     const end = offset * limit;
-    const filteredPokemons = pokemons.filter((value) =>
+    const filteredPokemons = pokemonsToRender.filter((value) =>
       value.name.includes(search)
     );
 

@@ -25,6 +25,7 @@
 
     &__text{
       line-break: anywhere;
+
       a {
         text-decoration: none;
         color: $redColor;
@@ -51,10 +52,12 @@
       font-size: 20px;
     }
   }
+
   &__arrow {
     margin-left: 5px;
     cursor: pointer;
   }
+
   &__left {
     transform: rotate(180deg);
   }
@@ -62,8 +65,7 @@
   &__link{
 
     &__disabled{
-      pointer-events: none;
-    
+      pointer-events: none;  
     }
   }
 }

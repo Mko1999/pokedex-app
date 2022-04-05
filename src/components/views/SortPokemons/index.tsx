@@ -36,9 +36,8 @@ const SortPokemons: React.FC = () => {
     setVisible(!visible);
   };
 
-  const clickOutsidehandler = () => {
+  const clickOutsidehandler = (): void => {
     setVisible(false);
-    // alert("You have clicked outside the square box");
   };
   const dropdownRef = useRef<HTMLDivElement>(null);
   const sortBy = useSelector(sortBySelector);

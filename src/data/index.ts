@@ -6,4 +6,5 @@ export {
   getPokemonSpecies,
   getEvolutionChain,
   getPokemonTypes,
+  fetchFromUrl,
 } from "./data";

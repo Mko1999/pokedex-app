@@ -1,29 +1,38 @@
-import { NameURL, Types } from "../../types";
+import { NameURL, Pokemon } from "../../types";
+import { store } from "..";
 
-export const pokemonsSelector = (state: any): NameURL[] =>
-  state.pokemon.allPokemons;
+export const pokemonsSelector = (
+  state: ReturnType<typeof store.getState>
+): NameURL[] => state.pokemon.allPokemons;
 
-export const pokemonSelector = (state: any) => state.pokemon.pokemons;
+export const pokemonSelector = (
+  state: ReturnType<typeof store.getState>
+): Pokemon[] => state.pokemon.pokemons;
 
-export const pokemonTypesSelector = (state: any): NameURL[] =>
-  state.pokemon.pokemonTypes;
+export const errorSelector = (
+  state: ReturnType<typeof store.getState>
+): string => state.pokemon.error;
 
-export const pokemonsByTypeSelector = (state: any): NameURL[] =>
-  state.pokemon.pokemonsByType;
+export const loadingSelector = (
+  state: ReturnType<typeof store.getState>
+): boolean => state.pokemon.loading;
 
-export const errorSelector = (state: any) => state.pokemon.error;
+export const pokemonLoadingSelector = (
+  state: ReturnType<typeof store.getState>
+): boolean => state.pokemon.pokemonLoading;
 
-export const loadingSelector = (state: any) => state.pokemon.loading;
+export const offsetSelector = (
+  state: ReturnType<typeof store.getState>
+): number => state.pokemon.offset;
 
-export const pokemonLoadingSelector = (state: any) =>
-  state.pokemon.pokemonLoading;
+export const limitSelector = (
+  state: ReturnType<typeof store.getState>
+): number => state.pokemon.limit;
 
-export const offsetSelector = (state: any) => state.pokemon.offset;
+export const searchValueSelector = (
+  state: ReturnType<typeof store.getState>
+): string => state.pokemon.searchValue;
 
-export const limitSelector = (state: any) => state.pokemon.limit;
-
-export const searchValueSelector = (state: any) => state.pokemon.searchValue;
-
-export const filterTypeSelector = (state: any) => state.pokemon.filterType;
-
-export const sortBySelector = (state: any) => state.pokemon.sortBy;
+export const sortBySelector = (
+  state: ReturnType<typeof store.getState>
+): string => state.pokemon.sortBy;

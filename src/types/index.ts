@@ -1,4 +1,3 @@
-export type { ISpecies } from "./speciesTypes";
 export type {
   Moves,
   Types,
@@ -14,5 +13,8 @@ export type {
   DreamWorld,
   GameIndices,
   OfficialArtwork,
+  PokemonSpecies,
   VersionGroupDetails,
 } from "./global";
+export type { ThunkAction } from "./thunk";
+export type { HTMLElementEvent } from "./events";

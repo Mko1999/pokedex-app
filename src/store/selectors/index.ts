@@ -1,14 +1,17 @@
 export {
   pokemonsSelector,
   pokemonSelector,
-  pokemonTypesSelector,
-  pokemonsByTypeSelector,
   errorSelector,
   loadingSelector,
   pokemonLoadingSelector,
   offsetSelector,
   limitSelector,
   searchValueSelector,
-  filterTypeSelector,
   sortBySelector,
 } from "./pokemonSelector";
+
+export {
+  pokemonTypesSelector,
+  pokemonsByTypeSelector,
+  filterTypeSelector,
+} from "./pokemonTypeSelectors";

@@ -4,12 +4,9 @@ import { PokemonInfoProps } from "./types";
 
 const PokemonInfo: React.FC<PokemonInfoProps> = ({
   pokemonInfo,
-  pokemonPic,
   flavorText,
   id,
 }) => {
-  console.log(pokemonInfo, "33");
-  console.log(typeof pokemonPic, "44");
   const idString = `00${id}`.slice(-3);
   const imageSrc = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${idString}.png`;
 
@@ -17,7 +14,12 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
     <div className={styles.pokemon_info}>
       <div className={styles.pokemon_info__image}>
         <div className={styles.pokemon_info__image__container}>
-          <img draggable="false" src={imageSrc} alt="pokemon pic"></img>
+          <img
+            loading="lazy"
+            draggable="false"
+            src={imageSrc}
+            alt="pokemon pic"
+          ></img>
         </div>
       </div>
       <div className={styles.pokemon_info__mainInfo}>

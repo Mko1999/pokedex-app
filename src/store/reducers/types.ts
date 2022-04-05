@@ -3,8 +3,6 @@ import { NameURL, Pokemon } from "../../types";
 export interface IPokemonState {
   allPokemons: NameURL[];
   pokemons: Pokemon[];
-  pokemonTypes: any[];
-  pokemonsByType: any[];
   error: string;
   loading: boolean;
   pokemonLoading: boolean;
@@ -12,5 +10,12 @@ export interface IPokemonState {
   limit: number;
   searchValue: string;
   sortBy: string;
-  filterType: any;
+}
+
+export interface IPokemonTypeState {
+  pokemonTypes: NameURL[];
+  pokemonsByType: NameURL[];
+  error: string;
+  loading: boolean;
+  filterType: string;
 }

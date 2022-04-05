@@ -104,10 +104,12 @@
   background: $blueColor;
   border-radius: 50%;
   padding: 10px 15px;
+  border: 10px solid green;
 }
 
 .stat_wrapper{
-
+  width: 80px;
+  
   p{
     color: $redColor;
     font-size: 20px;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
@@ -6,53 +6,49 @@ import styles from "./FilterByType.module.scss";
 import { useOnOutsideClick } from "../../../hooks";
 
 import Arrow from "../../../assets/arrow.svg";
-import { api } from "../../../utils";
-import { getPokemonTypes } from "../../../data/data";
-import { NameURL } from "../../../types";
+
 import {
   fetchPokemonsByType,
-  fetchPokemonTypes,
+  setOffset,
   resetFilter,
   setFilter,
-  setOffset,
-} from "../../../store/actions/pokemonActions";
+} from "../../../store/actions/";
 import {
   filterTypeSelector,
   pokemonTypesSelector,
 } from "../../../store/selectors";
+
+import { ALL_TYPES, ALL } from "../../../constants";
+import { NameURL } from "../../../types";
 
 const FilterByType: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
-  const handleDropdown = () => {
+  const handleDropdown = (): void => {
     setVisible(!visible);
   };
 
   const types = useSelector(pokemonTypesSelector);
   const nameUrls = [
     {
-      name: "All types",
-      url: "All",
+      name: ALL_TYPES,
+      url: ALL,
     },
     ...types,
   ];
 
-  const filterPokemons = (e: any) => {
-    const exactType = e.target.dataset.url;
-    const typeName = e.target.dataset.name;
-    dispatch(setFilter(typeName));
-    if (exactType === "All") {
+  const filterPokemons = (e: NameURL): void => {
+    dispatch(setFilter(e.name));
+    if (e.name === ALL) {
       dispatch(resetFilter());
     } else {
-      dispatch(fetchPokemonsByType(exactType));
+      dispatch(fetchPokemonsByType(e.url));
     }
 
     dispatch(setOffset(1));
   };
-
-  console.log(types, "222");
 
   const pokemonTypes = nameUrls?.map((type) => {
     return (
@@ -60,7 +56,7 @@ const FilterByType: React.FC = () => {
         data-url={type.url}
         data-name={type.name}
         role="button"
-        onClick={filterPokemons}
+        onClick={(): void => filterPokemons(type)}
         key={type.url}
         className={styles.filter_by_type__dropdown__element}
       >
@@ -85,7 +81,7 @@ const FilterByType: React.FC = () => {
 
   const filter = useSelector(filterTypeSelector);
 
-  const clickOutsidehandler = () => {
+  const clickOutsidehandler = (): void => {
     setVisible(false);
   };
 

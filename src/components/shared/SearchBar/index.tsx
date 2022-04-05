@@ -11,14 +11,16 @@ const SearchBar: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
   const dispatch = useDispatch();
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(setSearch(searchText));
     dispatch(setOffset(1));
-    setSearchText("");
+    if (searchText.length > 5) {
+      setSearchText("");
+    }
   };
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchText(e.target.value);
   };
 

@@ -7,12 +7,13 @@ import { PokemonCardProps } from "./types";
 
 import { pokemonLoadingSelector } from "../../../store/selectors";
 import { PokemonLoader } from "../../shared";
+import { Slots, Types } from "../../../types";
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, id }) => {
   const idString = `00${id}`.slice(-3);
   const imageSrc = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${idString}.png`;
   const pokemonLoading = useSelector(pokemonLoadingSelector);
-  console.log(pokemonLoading, "000");
+
   const pokemonID =
     pokemon.id > 9
       ? `0${pokemon.id}`
@@ -20,7 +21,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, id }) => {
       ? `00${pokemon.id}`
       : pokemon.id;
 
-  const pokemonType = pokemon.types.map((type: any) => type.type.name);
+  const pokemonType = pokemon.types.map((type: Types) => type.type.name);
 
   const pokemonTypeToString = Array.isArray(pokemonType)
     ? pokemonType.join(" , ")
@@ -42,6 +43,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, id }) => {
                     }
                   >
                     <img
+                      loading="lazy"
                       draggable="false"
                       alt="Pokemon"
                       className={styles.pokemon_card__container__img}
@@ -65,13 +67,13 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, id }) => {
           </div>
           {/* This is background that should be visible only in hover */}
           <div className={styles.pokemon_card__back}>
-            <Link to={"" || ""}>
+            <Link to={`pokemon/${pokemon.name.replace(" ", "-")}`}>
               <div className={styles.pokemon_card__back__container}>
                 <p className={styles.pokemon_card__back__container__name}>
                   {pokemon.name}
                 </p>
                 <h2 className={styles.pokemon_card__back__container__heading}>
-                  More info{" "}
+                  More info
                 </h2>
                 <div className={styles.pokemon_card__back__container__item}>
                   <p
