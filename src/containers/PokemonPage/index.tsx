@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FcHome } from "react-icons/fc";
 import { useNavigate } from "react-router";
 
-import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import styles from "./PokemonPage.module.scss";
@@ -18,7 +18,7 @@ import {
 } from "../../components/views";
 
 import { Button, Loader } from "../../components/shared";
-import { getPokemonInfo, maximumStats } from "../../utils";
+import { maximumStats } from "../../utils";
 
 import redArrow from "../../assets/redArrow.png";
 import { pokemonsSelector } from "../../store/selectors";
@@ -30,18 +30,17 @@ const PokemonPage: React.FC = () => {
   const allPokemons = useSelector(pokemonsSelector);
   const navigate = useNavigate();
 
-  const percentage = 66;
-
   const dispatch = useDispatch();
   useEffect(() => {
     if (!allPokemons.length) {
       dispatch(fetchPokemons());
     }
   }, [allPokemons]);
+
   const { name } = useParams();
   const [pokemon, setPokemon] = useState<any>(null);
-  const [prevPokemon, setPrevPokemon] = useState<any>(null);
-  const [nextPokemon, setNextPokemon] = useState<any>(null);
+  const [prevPokemon, setPrevPokemon] = useState<string>("");
+  const [nextPokemon, setNextPokemon] = useState<string>("");
   const [flavor, setFlavor] = useState<any>(null);
   const [evolutionChain, setEvolutionChain] = useState<any>(null);
 
@@ -69,8 +68,10 @@ const PokemonPage: React.FC = () => {
 
   useEffect(() => {
     const pokemonGetter: () => void = async () => {
-      const activePokemonFlavor = await getPokemonSpecies(pokemon.id);
-      setFlavor(activePokemonFlavor);
+      if (pokemon) {
+        const activePokemonFlavor = await getPokemonSpecies(pokemon.id);
+        setFlavor(activePokemonFlavor);
+      }
     };
     if (pokemon) {
       pokemonGetter();
@@ -103,20 +104,20 @@ const PokemonPage: React.FC = () => {
       pokemonGetter();
     }
   }, [flavor]);
+  console.log(pokemon, "poke");
+  console.log(evolutionChain, "nm");
+  console.log(prevPokemon, "prev");
+  console.log(flavor, "flavor");
 
-  const a = pokemon?.stats?.map((stat: Stats) => {
+  const pokemonStat = pokemon?.stats?.map((stat: Stats) => {
     return stat.base_stat;
   });
 
-  console.log(a, "a");
-
-  const b = Object.values(maximumStats).map((item) => {
+  const maximumStat = Object.values(maximumStats).map((item) => {
     return item;
   });
 
-  console.log(b, "b");
-
-  const tokos = (arr1: number[], arr2: number[]): number[] => {
+  const percentage = (arr1: number[], arr2: number[]): number[] => {
     const newArr = [];
     for (let i = 0; i < arr1?.length; i++) {
       newArr.push(Math.round((arr1[i] / arr2[i]) * 100));
@@ -124,36 +125,26 @@ const PokemonPage: React.FC = () => {
     return newArr;
   };
 
-  console.log(tokos(a, b), "tokos");
-
-  const pokemonInfo = getPokemonInfo(pokemon).map((item) => {
-    return (
-      <div
-        key={nanoid()}
-        className={styles.pokemon_info__mainInfo__advanced__item}
-      >
-        <p className={styles.pokemon_info__mainInfo__advanced__text}>
-          {item.title}
-        </p>
-        <img
-          className={styles.pokemon_info__mainInfo__advanced__image}
-          src={item.image}
-          draggable="false"
-        ></img>
-        <p className={styles.pokemon_info__mainInfo__advanced__title}>
-          {item.info}
-        </p>
-      </div>
-    );
-  });
-
-  const pokemonPic = pokemon?.sprites.front_default;
   const flavorText = flavor?.flavor_text_entries[0].flavor_text;
 
+  const evolution = "Evolution";
+
   const pokemonStats = pokemon?.stats?.map((stat: Stats, index: number) => {
-    const realStat = tokos(a, b)[index];
+    const realStat = percentage(pokemonStat, maximumStat)[index];
     return (
-      <CircularProgressbar key={nanoid()} value={realStat} text={`${realStat}`}>
+      <CircularProgressbar
+        key={nanoid()}
+        value={realStat}
+        text={`${realStat}%`}
+        styles={buildStyles({
+          rotation: 0,
+          strokeLinecap: "butt",
+          pathTransitionDuration: 0.5,
+          pathColor: "#272324",
+          textColor: "#f88",
+          trailColor: "#fa7c30",
+        })}
+      >
         <div className={styles.stat_container}>
           <div className={styles.stat_wrapper}>
             <p>{stat.base_stat}</p>
@@ -189,14 +180,20 @@ const PokemonPage: React.FC = () => {
                 />
               </Button>
             </div>
-            <PokemonInfo
-              flavorText={flavorText}
-              pokemonInfo={pokemonInfo}
-              pokemonPic={pokemonPic}
-              id={pokemon.id}
-            />
+            {pokemon && (
+              <PokemonInfo
+                flavorText={flavorText}
+                types={pokemon.types}
+                height={pokemon.height}
+                weight={pokemon.weight}
+                isDefault={pokemon.is_default}
+                baseXP={pokemon.base_experience}
+                order={pokemon.order}
+                id={pokemon.id}
+              />
+            )}
             <PokemonStats pokemonStats={pokemonStats} />
-            <PokemonEvolutions />
+            <PokemonEvolutions evolution={evolution} />
           </div>
         </div>
       ) : (

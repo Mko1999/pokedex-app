@@ -106,7 +106,7 @@ const MainPage: React.FC = () => {
         <PokemonCards />
 
         <Pagination
-          totalCount={allPokemons.length}
+          totalCount={pokemonsToRender.length}
           siblingCount={1}
           pageSize={limit}
         />

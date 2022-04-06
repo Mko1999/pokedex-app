@@ -34,16 +34,28 @@
     }
   }
 
+
   &__mainInfo {
     display: flex;
     flex-direction: column;
     background: darkgrey;
     border-radius: 16px;
 
+    &__container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    @include breakpoint(tablet){
+      grid-template-columns: 1fr 1fr;
+    }
+}
+
+    
+
     &__sample {
       color: $activeBlackColor;
       font-size: 25px;
-      word-break: break-all;
       text-align: center;
       font-family: cursive;
       text-transform: capitalize;
@@ -58,6 +70,55 @@
       @include breakpoint(tablet-small){
         grid-template-columns: 1fr 1fr;
       }
+
+      &__image{
+        width: 35px;
+        height: 25px;
+        object-fit: cover;
+      }
+
+      &__parent{
+        @include flexStart(column);
+
+        &__title{
+          
+
+          font-size: 20px;
+          text-align: center;
+          padding: 4px;
+          border-radius: 10px;
+          border-bottom: 2px solid $redColor;
+          text-transform: capitalize;
+        }
+
+        &__text{
+          text-transform: capitalize;
+          font-size: 18px;
+          font-weight: 500;
+          color: $redColor;
+          background: $activeBlackColor;
+          padding: 8px;
+          border-radius: 5px;
+          text-align: center;
+          width: 80%;
+          @include flexCenter(row);
+          max-height: 50px;
+          height: 50px;
+
+          &__type{
+            margin-left: 5px;
+          }
+        }
+      }
+
+      &__type__parent{
+        display: flex;
+        justify-content: space-around;
+      }
     }
-  }
+  }  
 }
+  
+
+
+

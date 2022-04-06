@@ -47,7 +47,7 @@ export const getEachPokemonTypes = async (name: string): Promise<void> => {
 };
 
 export const getEvolutionChain = async (id: number): Promise<void> => {
-  const { data } = await api.get(`evolution-chain/${id}`);
+  const { data } = await api.get(`evolution-chain${id}`);
   return data.chain;
 };
 

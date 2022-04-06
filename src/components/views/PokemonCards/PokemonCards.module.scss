@@ -13,6 +13,11 @@
       @include flexCenter(row);
       width: 100%;
       min-height: calc(100vh - 288px);
+
+      &__error{
+        font-size: 30px;
+        color: $redColor;
+      }
     }
 
     @include breakpoint(laptop) {

@@ -16,9 +16,11 @@ const PokemonStats: React.FC<PokemonStatProps> = ({ pokemonStats }) => {
   return (
     <div className={styles.pokemon_stats}>
       <h2 className={styles.pokemon_stats__title}>Stats</h2>
-      <div className={styles.pokemon_stats__container}>{mainStat}</div>
-      <div className={styles.pokemon_stats__container__item}>
-        {pokemonStats}
+      <div className={styles.pokemon_stats__parent}>
+        <div className={styles.pokemon_stats__container}>{mainStat}</div>
+        <div className={styles.pokemon_stats__container__item}>
+          {pokemonStats}
+        </div>
       </div>
     </div>
   );

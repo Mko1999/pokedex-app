@@ -5,6 +5,17 @@
 .pokemon_stats {
   @include flexCenter(column);
 
+  &__parent{
+    width: 100%;
+    @include flexStart(column);
+
+    @include breakpoint(tablet-small){
+      flex-direction: row;
+      max-height: 500px;
+      height: 500px;
+    }
+  }
+
   &__title {
     color: $redColor;
     font-size: 22px;
@@ -19,16 +30,24 @@
     width: 90%;
     place-items: center;
 
+    @include breakpoint(tablet-small){
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 500px;
+      gap: 0;
+    }
+
     &__title{
       text-transform: capitalize;
       color: $activeBlackColor;
-      font-size: 20px;
+      font-size: 24px;
       text-align: center;
       font-family: cursive;
       font-weight: 500;
 
       @include breakpoint(tablet){
-        font-size: 15px;
+        font-size: 20px;
       }
     }
 
@@ -38,6 +57,13 @@
       width: 90%;
       gap: 15px 20px;
       place-items: center;
+
+      @include breakpoint(tablet-small){
+        display: flex;
+        flex-direction: column;
+        height: inherit;
+       
+      }
     }
   }
 }

@@ -9,6 +9,7 @@ export type {
   Species,
   Sprites,
   Abilities,
+  SpeciesURL,
   HomeSprite,
   DreamWorld,
   GameIndices,
