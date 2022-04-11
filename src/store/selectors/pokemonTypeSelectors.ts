@@ -1,14 +1,10 @@
-import { NameURL } from "../../types";
-import { store } from "..";
+import { NameURL, RootState } from "../../types";
 
-export const pokemonTypesSelector = (
-  state: ReturnType<typeof store.getState>
-): NameURL[] => state.pokemonType.pokemonTypes;
+export const pokemonTypesSelector = (state: RootState): NameURL[] =>
+  state.pokemonType.pokemonTypes;
 
-export const pokemonsByTypeSelector = (
-  state: ReturnType<typeof store.getState>
-): NameURL[] => state.pokemonType.pokemonsByType;
+export const pokemonsByTypeSelector = (state: RootState): NameURL[] =>
+  state.pokemonType.pokemonsByType;
 
-export const filterTypeSelector = (
-  state: ReturnType<typeof store.getState>
-): string => state.pokemonType.filterType;
+export const filterTypeSelector = (state: RootState): string =>
+  state.pokemonType.filterType;

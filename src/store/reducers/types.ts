@@ -6,7 +6,7 @@ export interface IPokemonState {
   error: string;
   loading: boolean;
   pokemonLoading: boolean;
-  offset: number;
+  page: number;
   limit: number;
   searchValue: string;
   sortBy: string;

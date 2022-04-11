@@ -1,9 +1,12 @@
 import React from "react";
 import classNames from "classnames";
+
 import styles from "./PokemonInfo.module.scss";
 import { PokemonInfoProps } from "./types";
+
 import redArrow from "../../../assets/redArrow.png";
-import { meterToFeet, kgToPound } from "../../../utils";
+import { meterToFeet, kgToPound, getID } from "../../../utils";
+import { Image } from "../../shared";
 
 const PokemonInfo: React.FC<PokemonInfoProps> = ({
   types,
@@ -15,7 +18,7 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
   baseXP,
   order,
 }) => {
-  const idString = `00${id}`.slice(-3);
+  const idString = getID(id);
   const imageSrc = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${idString}.png`;
 
   const typeRenderer = types.map(({ slot, type }) => {
@@ -37,9 +40,9 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
     <div className={styles.pokemon_info}>
       <div className={styles.pokemon_info__image}>
         <div className={styles.pokemon_info__image__container}>
-          <img
+          <Image
             loading="lazy"
-            draggable="false"
+            draggable={false}
             src={imageSrc}
             alt="pokemon pic"
           />
@@ -54,10 +57,11 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
             >
               Height
             </p>
-            <img
+            <Image
+              alt="Arrow"
               className={styles.pokemon_info__mainInfo__advanced__image}
               src={redArrow}
-              draggable="false"
+              draggable={false}
             />
             <p
               className={styles.pokemon_info__mainInfo__advanced__parent__text}
@@ -73,10 +77,11 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
             >
               Weight
             </p>
-            <img
+            <Image
               className={styles.pokemon_info__mainInfo__advanced__image}
               src={redArrow}
-              draggable="false"
+              draggable={false}
+              alt="Arrow"
             />
             <p
               className={styles.pokemon_info__mainInfo__advanced__parent__text}
@@ -91,10 +96,11 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
             >
               Base experience
             </p>
-            <img
+            <Image
               className={styles.pokemon_info__mainInfo__advanced__image}
               src={redArrow}
-              draggable="false"
+              draggable={false}
+              alt="Arrow"
             />
             <p
               className={styles.pokemon_info__mainInfo__advanced__parent__text}
@@ -109,10 +115,11 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
             >
               Is default
             </p>
-            <img
+            <Image
               className={styles.pokemon_info__mainInfo__advanced__image}
               src={redArrow}
-              draggable="false"
+              draggable={false}
+              alt="Arrow"
             />
             <p
               className={styles.pokemon_info__mainInfo__advanced__parent__text}
@@ -127,10 +134,11 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
             >
               Types
             </p>
-            <img
+            <Image
               className={styles.pokemon_info__mainInfo__advanced__image}
               src={redArrow}
-              draggable="false"
+              draggable={false}
+              alt="Arrow"
             />
             <div
               className={styles.pokemon_info__mainInfo__advanced__type__parent}
@@ -145,10 +153,11 @@ const PokemonInfo: React.FC<PokemonInfoProps> = ({
             >
               Order
             </p>
-            <img
+            <Image
               className={styles.pokemon_info__mainInfo__advanced__image}
               src={redArrow}
-              draggable="false"
+              draggable={false}
+              alt="Arrow"
             />
             <p
               className={styles.pokemon_info__mainInfo__advanced__parent__text}

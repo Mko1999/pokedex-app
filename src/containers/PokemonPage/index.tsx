@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { FcHome } from "react-icons/fc";
 import { useNavigate } from "react-router";
 
@@ -17,18 +17,19 @@ import {
   PokemonStats,
 } from "../../components/views";
 
-import { Button, Loader } from "../../components/shared";
+import { Button, Loader, Image } from "../../components/shared";
 import { maximumStats } from "../../utils";
 
 import redArrow from "../../assets/redArrow.png";
-import { pokemonsSelector } from "../../store/selectors";
+import { loadingSelector, pokemonsSelector } from "../../store/selectors";
 import { fetchFromUrl, getPokemonSpecies } from "../../data/data";
 import { fetchPokemons } from "../../store/actions";
-import { NameURL, Stats } from "../../types";
+import { NameURL, SpeciesURL, Stats, Pokemon } from "../../types";
 
 const PokemonPage: React.FC = () => {
   const allPokemons = useSelector(pokemonsSelector);
   const navigate = useNavigate();
+  const loading = useSelector(loadingSelector);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -38,11 +39,13 @@ const PokemonPage: React.FC = () => {
   }, [allPokemons]);
 
   const { name } = useParams();
-  const [pokemon, setPokemon] = useState<any>(null);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+
   const [prevPokemon, setPrevPokemon] = useState<string>("");
   const [nextPokemon, setNextPokemon] = useState<string>("");
-  const [flavor, setFlavor] = useState<any>(null);
-  const [evolutionChain, setEvolutionChain] = useState<any>(null);
+  const [flavor, setFlavor] = useState<SpeciesURL | null>(null);
+
+  const [evolutionChain, setEvolutionChain] = useState<NameURL[] | []>([]);
 
   useEffect(() => {
     const pokemonGetter: () => void = async () => {
@@ -79,35 +82,36 @@ const PokemonPage: React.FC = () => {
   }, [pokemon]);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [name]);
+
+  useEffect(() => {
     const pokemonGetter: () => void = async () => {
-      const evolutionChain = await fetchFromUrl(flavor.evolution_chain.url);
-      let currentSpecies = evolutionChain.chain;
-      const arr: NameURL[] = [currentSpecies.species];
-      while (currentSpecies.evolves_to.length) {
-        currentSpecies = currentSpecies.evolves_to[0];
-        arr.push(currentSpecies.species);
+      if (flavor) {
+        const evolutionChain = await fetchFromUrl(flavor.evolution_chain.url);
+        const currentPokemon = evolutionChain.chain.species;
+
+        const nextEvolution = evolutionChain?.chain.evolves_to[0]?.species;
+
+        const lastEvolution =
+          evolutionChain.chain.evolves_to[0]?.evolves_to[0]?.species;
+        const evolutionsArray = [
+          currentPokemon,
+          nextEvolution,
+          lastEvolution,
+        ].filter((item) => item);
+
+        setEvolutionChain(evolutionsArray);
       }
-      const a = await Promise.all(
-        arr.map(async (item) => {
-          let data;
-          if (item.name === name) {
-            data = { ...pokemon };
-          } else {
-            data = await fetchFromUrl(item.url);
-          }
-          return data;
-        })
-      );
-      setEvolutionChain(a);
     };
     if (flavor) {
       pokemonGetter();
     }
   }, [flavor]);
-  console.log(pokemon, "poke");
-  console.log(evolutionChain, "nm");
-  console.log(prevPokemon, "prev");
-  console.log(flavor, "flavor");
 
   const pokemonStat = pokemon?.stats?.map((stat: Stats) => {
     return stat.base_stat;
@@ -117,17 +121,21 @@ const PokemonPage: React.FC = () => {
     return item;
   });
 
-  const percentage = (arr1: number[], arr2: number[]): number[] => {
+  const percentage = (
+    realStats: number[] | undefined,
+    maximumStats: number[] | undefined
+  ): number[] => {
     const newArr = [];
-    for (let i = 0; i < arr1?.length; i++) {
-      newArr.push(Math.round((arr1[i] / arr2[i]) * 100));
+    if (realStats && maximumStats) {
+      for (let i = 0; i < realStats?.length; i++) {
+        newArr.push(Math.round((realStats[i] / maximumStats[i]) * 100));
+      }
     }
+
     return newArr;
   };
 
   const flavorText = flavor?.flavor_text_entries[0].flavor_text;
-
-  const evolution = "Evolution";
 
   const pokemonStats = pokemon?.stats?.map((stat: Stats, index: number) => {
     const realStat = percentage(pokemonStat, maximumStat)[index];
@@ -168,7 +176,8 @@ const PokemonPage: React.FC = () => {
               <p className={styles.pokemon_page__goback__text}>
                 <Link to="/">Go to Home Page</Link>
               </p>
-              <img
+              <Image
+                alt="Arrow"
                 src={redArrow}
                 className={styles.pokemon_page__goback__img}
               />
@@ -193,11 +202,13 @@ const PokemonPage: React.FC = () => {
               />
             )}
             <PokemonStats pokemonStats={pokemonStats} />
-            <PokemonEvolutions evolution={evolution} />
+            {evolutionChain.length ? (
+              <PokemonEvolutions evolutions={evolutionChain} />
+            ) : null}
           </div>
         </div>
       ) : (
-        <Loader />
+        <Loader loading={loading} />
       )}
     </React.Fragment>
   );

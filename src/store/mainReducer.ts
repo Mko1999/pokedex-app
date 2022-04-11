@@ -5,4 +5,5 @@ const mainReducer = combineReducers({
   pokemon: pokemonReducer,
   pokemonType: pokemonTypeReducer,
 });
+
 export default mainReducer;

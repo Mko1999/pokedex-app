@@ -1,4 +1,4 @@
-export const getRange = (start: number, end: number): number[] => {
+export const getPaginationRange = (start: number, end: number): number[] => {
   const length = end - start + 1;
 
   return Array.from({ length }, (_, index) => index + start);

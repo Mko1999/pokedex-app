@@ -1,3 +1,4 @@
+import { AppDispatch } from "./../../types/thunk";
 import {
   FETCH_POKEMON_TYPES_REQUEST,
   FETCH_POKEMON_TYPES_ERROR,
@@ -68,31 +69,35 @@ const fetchPokemonsByTypeSuccess = (
   };
 };
 
-export const fetchPokemonTypes = () => async (dispatch: any) => {
-  dispatch(fetchPokemonTypesRequest());
-  try {
-    const data = await getPokemonTypes();
-    dispatch(fetchPokemonTypesSuccess(data));
-  } catch (e) {
-    if (e instanceof Error) dispatch(fetchPokemonTypesError(e.message));
-  }
-};
-
-export const fetchPokemonsByType = (url: string) => async (dispatch: any) => {
-  dispatch(fetchPokemonsByTypeRequest());
-  try {
-    const data = await fetchFromUrl(url);
-    dispatch(
-      fetchPokemonsByTypeSuccess(
-        data.pokemon.map((item: Slots) => item.pokemon)
-      )
-    );
-  } catch (e) {
-    if (e instanceof Error) {
-      dispatch(fetchPokemonsByTypeError(e.message));
+export const fetchPokemonTypes =
+  () =>
+  async (dispatch: any): Promise<void> => {
+    dispatch(fetchPokemonTypesRequest());
+    try {
+      const data = await getPokemonTypes();
+      dispatch(fetchPokemonTypesSuccess(data));
+    } catch (e) {
+      if (e instanceof Error) dispatch(fetchPokemonTypesError(e.message));
     }
-  }
-};
+  };
+
+export const fetchPokemonsByType =
+  (url: string) =>
+  async (dispatch: any): Promise<void> => {
+    dispatch(fetchPokemonsByTypeRequest());
+    try {
+      const data = await fetchFromUrl(url);
+      dispatch(
+        fetchPokemonsByTypeSuccess(
+          data.pokemon.map((item: Slots) => item.pokemon)
+        )
+      );
+    } catch (e) {
+      if (e instanceof Error) {
+        dispatch(fetchPokemonsByTypeError(e.message));
+      }
+    }
+  };
 
 export const setFilter = (
   payload: string

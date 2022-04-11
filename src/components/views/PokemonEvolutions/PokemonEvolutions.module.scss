@@ -6,25 +6,55 @@
   
   @include flexCenter(column);
   padding-top: 40px;
+ 
 
   @include breakpoint(tablet){
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    width: 90%;
-    place-items: center;
+   @include flexStart(column);
+    width: 100%;
+   
   }
   &__title {
     font-size: 25px;
     color: $redColor;
   }
   &__container {
-    display: grid;
-    grid-template-columns: $gridTemplateColumns;
+   @include flexSpaceAround(row);
+   width: 100%;
 
+   &:first-of-type > &__arrow{
+     display: none;
+   }
 
-    &__arrow {
+   @include breakpoint(tablet){
+     flex-direction: column;
+   }
+
+   &__card{
+     width: 80%;
+     margin: 0 auto;
+   }
+
+    &__parent{
       @include flexCenter(row);
+      width: 100%;
+
+      @include breakpoint(tablet){
+        flex-direction: column;
+      }
+
+      &__arrow {
+        @include flexCenter(row);
+
+        @include breakpoint(tablet){
+          margin: 20px 0;
+          transform: rotate(90deg);
+        }
+  
+
+      @include breakpoint(tablet){
+        flex-direction: column;
+      }
+    }
     }
   }
 }

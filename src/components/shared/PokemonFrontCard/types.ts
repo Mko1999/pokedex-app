@@ -1,6 +1,6 @@
 import { Pokemon } from "../../../types/pokemon";
 
-export type PokemonCardProps = {
+export type PokemonFrontCardProps = {
   pokemon: Pokemon;
-  id: number;
+  id: any;
 };

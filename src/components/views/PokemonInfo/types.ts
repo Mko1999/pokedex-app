@@ -1,12 +1,10 @@
-import { NameURL } from "./../../../types/global";
+import { PokemonTypes } from "./../../../types/pokemon";
+import { NameURL } from "../../../types/pokemon";
 
 export type PokemonInfoProps = {
-  types: {
-    slot: number;
-    type: NameURL;
-  }[];
+  types: PokemonTypes[];
   flavorText: string;
-  id: number | undefined;
+  id: number;
   height: number;
   weight: number;
   isDefault: boolean;

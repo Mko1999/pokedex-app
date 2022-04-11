@@ -1,13 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { PokemonCard } from "..";
+import { PokemonLoader } from "../../shared";
+import { PokemonCard } from "../../views";
+
+import styles from "./PokemonCards.module.scss";
+
 import {
   pokemonLoadingSelector,
   pokemonSelector,
 } from "../../../store/selectors";
 import { Pokemon } from "../../../types";
-import { PokemonLoader } from "../../shared";
-import styles from "./PokemonCards.module.scss";
 
 const PokemonCards: React.FC = () => {
   const pokemons = useSelector(pokemonSelector);
@@ -22,7 +24,7 @@ const PokemonCards: React.FC = () => {
       {loading ? (
         <PokemonLoader />
       ) : (
-        <div className={styles.pokemon_cards}> {singlePokemonCard}</div>
+        <div className={styles.pokemon_cards}>{singlePokemonCard}</div>
       )}
     </div>
   );

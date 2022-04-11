@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 import { PrevNextProps } from "./types";
-import { FIRST_POKEMON_NAME, LAST_POKEMON_NAME } from "../../../constants";
-
 import styles from "./PrevNextPages.module.scss";
+
+import {
+  FIRST_POKEMON_NAME,
+  LAST_POKEMON_NAME,
+  POKEMONLINK,
+} from "../../../constants";
 import Arrow from "../../../assets/arrow.svg";
+import { Image } from "../../shared";
 
 const PrevNextPages: React.FC<PrevNextProps> = ({
   name,
@@ -32,9 +37,12 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
   return (
     <div className={styles.prev_next_pages}>
       <div className={styles.prev_next_pages__back}>
-        <img alt="arrow" className={iconClassname} src={Arrow} />
+        <Image alt="arrow" className={iconClassname} src={Arrow} />
         <p className={styles.prev_next_pages__next__text}>
-          <Link className={previousLinkClassName} to={`/pokemon/${prevName}`}>
+          <Link
+            className={previousLinkClassName}
+            to={`/${POKEMONLINK}/${prevName}`}
+          >
             {realPrevName}
           </Link>
         </p>
@@ -44,11 +52,14 @@ const PrevNextPages: React.FC<PrevNextProps> = ({
       </div>
       <div className={styles.prev_next_pages__next}>
         <p className={styles.prev_next_pages__next__text}>
-          <Link className={nextLinkClassName} to={`/pokemon/${nextName}`}>
+          <Link
+            className={nextLinkClassName}
+            to={`/${POKEMONLINK}/${nextName}`}
+          >
             {realNextName}
           </Link>
         </p>
-        <img
+        <Image
           alt="arrow"
           className={styles.prev_next_pages__arrow}
           src={Arrow}

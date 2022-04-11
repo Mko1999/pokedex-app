@@ -81,14 +81,17 @@
         @include flexStart(column);
 
         &__title{
-          
-
           font-size: 20px;
           text-align: center;
           padding: 4px;
           border-radius: 10px;
           border-bottom: 2px solid $redColor;
           text-transform: capitalize;
+
+          @include breakpoint(tablet-large){
+            height: 40px;
+          }
+
         }
 
         &__text{
@@ -114,6 +117,7 @@
       &__type__parent{
         display: flex;
         justify-content: space-around;
+        width: 100%;
       }
     }
   }  

@@ -22,7 +22,7 @@ const initialState: IPokemonState = {
   error: "",
   loading: false,
   pokemonLoading: false,
-  offset: 1,
+  page: 1,
   limit: 10,
   searchValue: "",
   sortBy: sortOptions[0],
@@ -62,7 +62,7 @@ const pokemonReducer = (
     case OFFSET_CHANGE: {
       return {
         ...state,
-        offset: payload,
+        page: payload,
       };
     }
 

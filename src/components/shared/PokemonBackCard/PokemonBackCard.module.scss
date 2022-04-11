@@ -1,0 +1,73 @@
+@import "../../../styles/breakpoints.scss";
+@import "../../../styles/utils.scss";
+@import "../../../styles/variables.scss"; 
+
+.pokemon_card__back{
+    position: absolute;
+    box-shadow: $boxShadow;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    background: $preserve3DColor;
+    backface-visibility: hidden;
+    overflow: hidden;
+    transform: rotateY(180deg);
+     
+    &__container {
+      background: #bca48f36;
+      @include flexCenter(column);
+      border-radius: 10px;
+      user-select: none;
+      cursor: pointer;
+      padding: 9px;
+      height: 100%;
+  
+      &__heading{
+        margin: 0 !important;
+        color: $pinkColor;
+        font-size: 18px;
+      }
+  
+      &__name {
+        color: $pinkColor;
+        font-weight: 700;
+        font-size: 20px;
+        margin-top: 8px;
+        text-transform: capitalize;
+      }
+  
+      &__item {
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        place-items: center;
+        width: 100%;
+        background: $pokBackgroundColor;
+        border-radius: 20px;
+        min-height: 75px;
+  
+        &__number {
+          color: $coffeeColor;
+          font-size: 16px;
+          padding-top: 6px;
+          font-weight: 700;
+        }
+  
+        &__type {
+          margin-top: 4px;
+          font-size: 20px;
+          color:$coffeeColor;
+          padding-bottom: 6px;
+          text-transform: capitalize;
+        }
+  
+        p{
+          color: $coffeeColor;
+          font-size: 16px;
+        }
+      }
+    }
+  
+    a{
+      text-decoration: none;
+    }
+  }

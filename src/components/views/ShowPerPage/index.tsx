@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./ShowPerPage.module.scss";
 import Arrow from "../../../assets/arrow.svg";
+import { Image } from "../../shared";
 
 import { useOnOutsideClick } from "../../../hooks";
 import { PAGINATION_LIMIT_OPTIONS } from "../../../constants";
+
 import { setLimit } from "../../../store/actions";
 import { limitSelector } from "../../../store/selectors";
 
@@ -41,8 +43,11 @@ const ShowPerPage: React.FC = () => {
 
   const limit = useSelector(limitSelector);
 
-  const handleLimitChange = (e: any) => {
-    const limitValue = e.target.dataset.value;
+  const handleLimitChange = (e: React.MouseEvent): void => {
+    if (!(e.target instanceof HTMLLIElement)) {
+      return;
+    }
+    const limitValue = Number(e.target.dataset.value);
     dispatch(setLimit(limitValue));
   };
 
@@ -79,7 +84,7 @@ const ShowPerPage: React.FC = () => {
           ref={dropdownRef}
         >
           <p className={titleClassname}>{limit}</p>
-          <img alt="arrow" src={Arrow} className={iconClassname} />
+          <Image alt="arrow" src={Arrow} className={iconClassname} />
           <ul className={dropdownClassname}>{limitOptions}</ul>
         </div>
       </div>

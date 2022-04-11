@@ -1,8 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classNames from "classnames";
+
 import styles from "./SortPokemons.module.scss";
+
 import Arrow from "../../../assets/arrow.svg";
+import { Image } from "../../shared";
+
 import { sortOptions } from "../../../utils";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { sortBySelector } from "../../../store/selectors";
@@ -11,9 +15,20 @@ import { setSortBy } from "../../../store/actions";
 const SortPokemons: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
-  const handleSortChange = (e: any) => {
+  const dispatch = useDispatch();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const sortBy = useSelector(sortBySelector);
+
+  const handleSortChange = (e: React.MouseEvent): void => {
+    if (!(e.target instanceof HTMLLIElement)) {
+      return;
+    }
     const sortValue = e.target.dataset.value;
-    dispatch(setSortBy(sortValue));
+    if (sortValue) {
+      dispatch(setSortBy(sortValue));
+    }
   };
 
   const sortOption = sortOptions.map((option) => {
@@ -30,8 +45,6 @@ const SortPokemons: React.FC = () => {
     );
   });
 
-  const dispatch = useDispatch();
-
   const toggleVisible = (): void => {
     setVisible(!visible);
   };
@@ -39,8 +52,6 @@ const SortPokemons: React.FC = () => {
   const clickOutsidehandler = (): void => {
     setVisible(false);
   };
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const sortBy = useSelector(sortBySelector);
 
   useOnClickOutside(dropdownRef, clickOutsidehandler);
 
@@ -69,7 +80,7 @@ const SortPokemons: React.FC = () => {
         className={containerClassname}
       >
         <p className={titleClassname}>{sortBy}</p>
-        <img alt="arrow" src={Arrow} className={iconClassname}></img>
+        <Image alt="arrow" src={Arrow} className={iconClassname} />
         <ul className={dropdownClassname}>{sortOption}</ul>
       </div>
     </div>

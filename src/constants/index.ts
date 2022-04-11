@@ -5,3 +5,4 @@ export const ALL_TYPES = "All types";
 export const LAST_POKEMON_NAME = "Toxtricity-Low-Key-Gmax";
 export const FIRST_POKEMON_NAME = "bulbasaur";
 export const ERROR_MESSAGE = "Unexpected error";
+export const POKEMONLINK = "pokemon";

@@ -1,8 +1,10 @@
 import React from "react";
-import styles from "./PokemonStats.module.scss";
-import { maximumStats, refactorWord } from "../../../utils";
 import { nanoid } from "nanoid";
+
 import { PokemonStatProps } from "./types";
+import styles from "./PokemonStats.module.scss";
+
+import { maximumStats, refactorWord } from "../../../utils";
 
 const PokemonStats: React.FC<PokemonStatProps> = ({ pokemonStats }) => {
   const mainStat = Object.keys(maximumStats).map((item) => {

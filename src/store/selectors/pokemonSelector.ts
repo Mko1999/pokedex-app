@@ -1,38 +1,25 @@
-import { NameURL, Pokemon } from "../../types";
-import { store } from "..";
+import { RootState, NameURL, Pokemon } from "../../types";
 
-export const pokemonsSelector = (
-  state: ReturnType<typeof store.getState>
-): NameURL[] => state.pokemon.allPokemons;
+export const pokemonsSelector = (state: RootState): NameURL[] =>
+  state.pokemon.allPokemons;
 
-export const pokemonSelector = (
-  state: ReturnType<typeof store.getState>
-): Pokemon[] => state.pokemon.pokemons;
+export const pokemonSelector = (state: RootState): Pokemon[] =>
+  state.pokemon.pokemons;
 
-export const errorSelector = (
-  state: ReturnType<typeof store.getState>
-): string => state.pokemon.error;
+export const errorSelector = (state: RootState): string => state.pokemon.error;
 
-export const loadingSelector = (
-  state: ReturnType<typeof store.getState>
-): boolean => state.pokemon.loading;
+export const loadingSelector = (state: RootState): boolean =>
+  state.pokemon.loading;
 
-export const pokemonLoadingSelector = (
-  state: ReturnType<typeof store.getState>
-): boolean => state.pokemon.pokemonLoading;
+export const pokemonLoadingSelector = (state: RootState): boolean =>
+  state.pokemon.pokemonLoading;
 
-export const offsetSelector = (
-  state: ReturnType<typeof store.getState>
-): number => state.pokemon.offset;
+export const offsetSelector = (state: RootState): number => state.pokemon.page;
 
-export const limitSelector = (
-  state: ReturnType<typeof store.getState>
-): number => state.pokemon.limit;
+export const limitSelector = (state: RootState): number => state.pokemon.limit;
 
-export const searchValueSelector = (
-  state: ReturnType<typeof store.getState>
-): string => state.pokemon.searchValue;
+export const searchValueSelector = (state: RootState): string =>
+  state.pokemon.searchValue;
 
-export const sortBySelector = (
-  state: ReturnType<typeof store.getState>
-): string => state.pokemon.sortBy;
+export const sortBySelector = (state: RootState): string =>
+  state.pokemon.sortBy;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./MainPage.module.scss";
@@ -25,20 +25,22 @@ import {
   searchValueSelector,
   sortBySelector,
 } from "../../store/selectors";
-import { NameURL } from "../../types";
 import {
   A_Z,
   HIGHEST_TO_LOWEST_NUMBER,
   LOWEST_TO_HIGHEST_NUMBER,
   Z_A,
 } from "../../utils/sortOptions";
+
+import { NameURL } from "../../types";
 import { ALL_TYPES } from "../../constants";
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
+  const [count, setCount] = useState<number>(0);
 
   const allPokemons = useSelector(pokemonsSelector);
-  const offset = useSelector(offsetSelector);
+  const page = useSelector(offsetSelector);
   const limit = useSelector(limitSelector);
   const sortBy = useSelector(sortBySelector);
   const search = useSelector(searchValueSelector);
@@ -53,11 +55,12 @@ const MainPage: React.FC = () => {
   const pokemonsToRender = filter !== ALL_TYPES ? pokemonsByType : allPokemons;
 
   const getUrls = (): string[] => {
-    const index = (offset - 1) * limit;
-    const end = offset * limit;
+    const index = (page - 1) * limit;
+    const end = page * limit;
     const filteredPokemons = pokemonsToRender.filter((value) =>
       value.name.includes(search)
     );
+    setCount(filteredPokemons.length);
 
     switch (sortBy) {
       case LOWEST_TO_HIGHEST_NUMBER:
@@ -70,12 +73,12 @@ const MainPage: React.FC = () => {
       case A_Z:
         return filteredPokemons
           .sort((a, b) => a.name.localeCompare(b.name))
-          .slice(index, offset * limit)
+          .slice(index, page * limit)
           .map((item: NameURL) => item.url);
       case Z_A:
         return filteredPokemons
           .sort((a, b) => b.name.localeCompare(a.name))
-          .slice(index, offset * limit)
+          .slice(index, page * limit)
           .map((item: NameURL) => item.url);
       default:
         return [];
@@ -85,11 +88,11 @@ const MainPage: React.FC = () => {
   useEffect(() => {
     const urls = getUrls();
     dispatch(fetchPokemon(urls));
-  }, [dispatch, offset, limit, sortBy, allPokemons, search, pokemonsByType]);
+  }, [dispatch, page, limit, sortBy, allPokemons, search, pokemonsByType]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [offset]);
+  }, [page]);
 
   return (
     <div className={styles.main_page}>
@@ -105,11 +108,7 @@ const MainPage: React.FC = () => {
         </div>
         <PokemonCards />
 
-        <Pagination
-          totalCount={pokemonsToRender.length}
-          siblingCount={1}
-          pageSize={limit}
-        />
+        <Pagination totalCount={count} siblingCount={1} pageSize={limit} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+
 import styles from "./PokemonLoader.module.scss";
 
 const PokemonLoader: React.FC = () => {

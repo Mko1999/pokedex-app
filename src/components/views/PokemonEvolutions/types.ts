@@ -1,3 +1,5 @@
+import { NameURL } from "../../../types/pokemon";
+
 export type PokemonEvolutionProps = {
-  evolution: any;
+  evolutions: NameURL[];
 };

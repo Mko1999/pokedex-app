@@ -41,7 +41,7 @@ export type IPagination = {
 };
 
 export type Pokemon = {
-  abilites: Abilities[];
+  abilities: Abilities[];
   base_experience: number;
   forms: Forms[];
   game_indices: GameIndices[];
@@ -59,7 +59,6 @@ export type Pokemon = {
   stats: Stats[];
   types: Types[];
   weight: number;
-  xp?: number | undefined | null;
 };
 
 export type Abilities = {
@@ -151,4 +150,15 @@ export type Slots = {
 export type PokemonSpecies = {
   pokemon_species: NameURL;
   rate: number;
+};
+
+export type PokemonTypes = {
+  slot: number;
+  type: NameURL;
+};
+
+export type TriggerTypes = {
+  baby_trigger_item: null;
+  chain: any;
+  id: number;
 };

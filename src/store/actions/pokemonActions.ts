@@ -1,3 +1,5 @@
+import { AnyAction } from "redux";
+import { AppDispatch } from "./../../types/thunk";
 import { getAllPokemonsData } from "../../data";
 import { fetchFromUrl } from "../../data/data";
 import { NameURL, Pokemon } from "../../types";

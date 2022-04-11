@@ -1,23 +1,23 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Search } from "react-bootstrap-icons";
+
 import styles from "./SearchBar.module.scss";
+
 import Input from "../Input";
 import Button from "../Button";
-import { Search } from "react-bootstrap-icons";
+
 import { INPUT_MAX_LENGTH } from "../../../constants";
-import { useDispatch } from "react-redux";
 import { setOffset, setSearch } from "../../../store/actions";
 
 const SearchBar: React.FC = () => {
   const [searchText, setSearchText] = useState<string>("");
   const dispatch = useDispatch();
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
+  const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     dispatch(setSearch(searchText));
     dispatch(setOffset(1));
-    if (searchText.length > 5) {
-      setSearchText("");
-    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -25,21 +25,19 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSearch} className={styles.searchbar}>
-        <Input
-          maxLength={INPUT_MAX_LENGTH}
-          value={searchText}
-          onChange={handleInputChange}
-          placeholder="Search by name"
-          type="text"
-          className={styles.searchbar__input}
-        />
-        <Button className={styles.searchbar__button}>
-          <Search size="20" />
-        </Button>
-      </form>
-    </div>
+    <form onSubmit={onSearchSubmit} className={styles.searchbar}>
+      <Input
+        maxLength={INPUT_MAX_LENGTH}
+        value={searchText}
+        onChange={handleInputChange}
+        placeholder="Search by name"
+        type="text"
+        className={styles.searchbar__input}
+      />
+      <Button className={styles.searchbar__button}>
+        <Search width="20" height="20" />
+      </Button>
+    </form>
   );
 };
 

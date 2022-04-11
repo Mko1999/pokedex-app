@@ -15,7 +15,9 @@ export type {
   GameIndices,
   OfficialArtwork,
   PokemonSpecies,
+  PokemonTypes,
   VersionGroupDetails,
-} from "./global";
-export type { ThunkAction } from "./thunk";
+  TriggerTypes,
+} from "./pokemon";
+export type { ThunkAction, RootState, AppDispatch } from "./thunk";
 export type { HTMLElementEvent } from "./events";

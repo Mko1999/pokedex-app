@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
 import styles from "./FilterByType.module.scss";
-import { useOnOutsideClick } from "../../../hooks";
 
 import Arrow from "../../../assets/arrow.svg";
+import { Image } from "../../shared";
 
 import {
   fetchPokemonsByType,
@@ -18,16 +18,21 @@ import {
   pokemonTypesSelector,
 } from "../../../store/selectors";
 
+import { useOnOutsideClick } from "../../../hooks";
 import { ALL_TYPES, ALL } from "../../../constants";
 import { NameURL } from "../../../types";
 
 const FilterByType: React.FC = () => {
-  const [visible, setVisible] = useState<boolean>(false);
+  const [visible, setIsVisible] = useState<boolean>(false);
+
+  const filter = useSelector(filterTypeSelector);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const dispatch = useDispatch();
 
   const handleDropdown = (): void => {
-    setVisible(!visible);
+    setIsVisible(!visible);
   };
 
   const types = useSelector(pokemonTypesSelector);
@@ -39,12 +44,12 @@ const FilterByType: React.FC = () => {
     ...types,
   ];
 
-  const filterPokemons = (e: NameURL): void => {
-    dispatch(setFilter(e.name));
-    if (e.name === ALL) {
+  const filterPokemons = (element: NameURL): void => {
+    dispatch(setFilter(element.name));
+    if (element.name === ALL) {
       dispatch(resetFilter());
     } else {
-      dispatch(fetchPokemonsByType(e.url));
+      dispatch(fetchPokemonsByType(element.url));
     }
 
     dispatch(setOffset(1));
@@ -53,11 +58,11 @@ const FilterByType: React.FC = () => {
   const pokemonTypes = nameUrls?.map((type) => {
     return (
       <li
+        key={type.url}
         data-url={type.url}
         data-name={type.name}
         role="button"
         onClick={(): void => filterPokemons(type)}
-        key={type.url}
         className={styles.filter_by_type__dropdown__element}
       >
         {type.name}
@@ -77,12 +82,8 @@ const FilterByType: React.FC = () => {
     [styles.filter_by_type__container__active]: visible,
   });
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const filter = useSelector(filterTypeSelector);
-
   const clickOutsidehandler = (): void => {
-    setVisible(false);
+    setIsVisible(false);
   };
 
   useOnOutsideClick(dropdownRef, clickOutsidehandler);
@@ -96,7 +97,7 @@ const FilterByType: React.FC = () => {
         ref={dropdownRef}
       >
         <p className={styles.filter_by_type__title}>{filter}</p>
-        <img alt="arrow" src={Arrow} className={iconClassname}></img>
+        <Image alt="arrow" src={Arrow} className={iconClassname} />
 
         <div ref={dropdownRef} className={dropdownClassname}>
           {pokemonTypes}

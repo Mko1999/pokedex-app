@@ -4,7 +4,6 @@ export {
   getMalePokemons,
   getFemalePokemons,
   getPokemonSpecies,
-  getEvolutionChain,
   getPokemonTypes,
   fetchFromUrl,
 } from "./data";
